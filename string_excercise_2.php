@@ -78,7 +78,8 @@ echo "<br>";
 echo strtolower($quote);
 echo "<br>";
 
-echo ucwords($quote);
+//echo ucwords($quote);
+echo "123";
 echo "<br>";
 
 ?>
