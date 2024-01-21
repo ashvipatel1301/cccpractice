@@ -1,25 +1,25 @@
 
 <?php
 
-//echo strlen("hello world");   //12
+echo strlen("hello world");   //12
 
-//echo str_replace("good","great","good morning");  //great morning
+echo str_replace("good","great","good morning");  //great morning
 
-//echo strpos("hello world","world");     //6
+echo strpos("hello world","world");     //6
 
-//echo substr("hello world",7,5);   //world
+echo substr("hello world",7,5);   //world
 
-//echo strtolower("Hello World");   //hello world
+echo strtolower("Hello World");   //hello world
 
-//echo strtoupper("Hello World");    //HELLO WORLD
+echo strtoupper("Hello World");    //HELLO WORLD
 
-//echo trim(" Hello World ");        //--Hello World
+echo trim(" Hello World ");        //--Hello World
 
-//echo implode(" ",array("honda","activa","scooty"));  //honda activa scooty
+echo implode(" ",array("honda","activa","scooty"));  //honda activa scooty
 
-//print_r(explode(" ","hello world"));   //Array ( [0] => hello world [1] => hii )
+print_r(explode(" ","hello world"));   //Array ( [0] => hello world [1] => hii )
 
-//echo htmlspecialchars("this is <i>italic</i> word");   //this is <i>italic</i> word
+echo htmlspecialchars("this is <i>italic</i> word");   //this is <i>italic</i> word
 
 /*
 echo $str='<b>hello world</b>';
@@ -27,27 +27,27 @@ echo htmlentities("<b>hello world</b>");
 */
 
 
-//echo str_repeat("Wow",5);      //WowWowWowWowWow
+echo str_repeat("Wow",5);      //WowWowWowWowWow
 
-//echo strrev("hello world");    //dlrow olleh
+echo strrev("hello world");    //dlrow olleh
 
-//print_r(str_split("hello world"));     //Array ( [0] => h [1] => e [2] => l [3] => l [4] => o [5] => [6] => w [7] => o [8] => r [9] => l [10] => d )
+print_r(str_split("hello world"));     //Array ( [0] => h [1] => e [2] => l [3] => l [4] => o [5] => [6] => w [7] => o [8] => r [9] => l [10] => d )
 
-//echo str_shuffle("hello world");    //dhl ewrlloo
+echo str_shuffle("hello world");    //dhl ewrlloo
 
-//echo str_word_count("hello world ");    //2
+echo str_word_count("hello world ");    //2
 
-//echo substr_replace("hello world","india",2,2);     //heindiao world
+echo substr_replace("hello world","india",2,2);     //heindiao world
 
-//echo str_pad("hello guys",15,"*",STR_PAD_RIGHT);      //hello guys*****
+echo str_pad("hello guys",15,"*",STR_PAD_RIGHT);      //hello guys*****
 
-//echo strcoll("hello world","hello world");   //0
+echo strcoll("hello world","hello world");   //0
 
-//echo strcspn("hello world","w");   //6
+echo strcspn("hello world","w");   //6
 
-//echo stristr("hello world of india","wo");   //world of india
+echo stristr("hello world of india","wo");   //world of india
 
-//echo ucfirst("india is pride for me");   //India is pride for me   
+echo ucfirst("india is pride for me");   //India is pride for me   
 
 
 
@@ -121,7 +121,7 @@ echo str_shuffle($str);
 
 
 //str_split=Converts a string to an array, breaking it into smaller chunks.
-#echo str_split("hello");
+#echo str_split("hello"); //var
 //print_r(str_split("Hello"));    //working=print_r is used to print the information that is more readable to human
 
 
