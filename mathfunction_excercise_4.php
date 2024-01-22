@@ -15,7 +15,7 @@
 // echo "<br>";
 // echo round(-4.40);     //-4
 // echo "<br>";
-// echo round(-4.60);      //-5
+// echo round(-4.60,2);      //-5
 
 #power function
 // pow = Returns the value of a base raised to the power of an exponent.
