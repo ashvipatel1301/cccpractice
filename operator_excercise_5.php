@@ -97,7 +97,7 @@ $str1="hello world";
 $str2="Php";
 $str3="hii";
 
-// echo $str1.$str2;
+echo $str1.$str2;
 //Concatenation Assignment:Appends $str2 to $str1
 
 // echo $str1.=$str2;

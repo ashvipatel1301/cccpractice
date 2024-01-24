@@ -3,9 +3,9 @@
 #If - The `if` statement is used to execute a block of code if a specified condition is true.
 $a=23;
 $b=20;
-// if  ($a>0){
-//     echo "Hello,How are you!";
-// }
+if  ($a>0){
+    echo "Hello,How are you!";
+}
 
 #If else -   The `if-else` statement allows you to execute one block of code if a condition is true and another block if the condition is false.
 
