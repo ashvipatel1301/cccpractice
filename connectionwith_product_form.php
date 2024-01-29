@@ -13,6 +13,7 @@ $Status= $_POST['statusdetails'];
 $Created_At= $_POST['createdcost'];
 $Updated_At= $_POST['updatedcost'];
 
+//$
 // echo $Productname;
 
 $host="localhost";

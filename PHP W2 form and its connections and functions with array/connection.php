@@ -21,14 +21,14 @@ try{
     }
 
 //--------------insert function called---------------
-$sql=insert('ccc_product',$product_data);
-$result=mysqli_query($conn,$sql);
+// $sql=insert('ccc_product',$product_data);
+// $result=mysqli_query($conn,$sql);
 
-if($result){
-    echo "Your record is inserted successfully";
-}else{
-    echo "your record is not inserted";
-}
+// if($result){
+//     echo "Your record is inserted successfully";
+// }else{
+//     echo "your record is not inserted";
+// }
 
 //---------------updated fucntion----------------
 

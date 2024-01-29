@@ -4,14 +4,22 @@
 </head>
 <body>
     <h1 style=text-align:center>Product Details Form Template</h1>
-    <form action="connectionwith_product_form.php" method="post">
+    <form action="catalog_sql_connection.php" method="post">
         <table>
+            <tr>
+                <td>
+                    Product ID:
+                </td>
+                <td>
+                    <input type="number" placeholder="Product ID" name="pdata[product_id]">
+                </td>
+            </tr>
             <tr>
                 <td>
                     Product Name:
                 </td>
                 <td>
-                    <input type="text" placeholder="Product Name" name="Productname">
+                    <input type="text" placeholder="Product Name" name="pdata[Productname]">
                 </td>
             </tr>
             <tr>
@@ -19,7 +27,7 @@
                     SKU:
                 </td>
                 <td>
-                    <input type="text" placeholder="Stock Keeping Unit" name="SKU">
+                    <input type="text" placeholder="Stock Keeping Unit" name="pdata[SKU]">
                 </td>
             </tr>
             <tr>
@@ -27,8 +35,8 @@
                     Product Type:
                 </td>
                 <td>
-                    <input type="radio" name="Producttype" value="s">Simple
-                    <input type="radio" name="Producttype" value="b">Bundle
+                    <input type="radio" name="pdata[Producttype]" value="s">Simple
+                    <input type="radio" name="pdata[Producttype]" value="b">Bundle
 
                 </td>
             </tr>
@@ -37,7 +45,7 @@
                     Category:
                 </td>
                 <td>
-                    <select name="Category" id="category">
+                    <select name="pdata[Category]" id="Category">
                         <option>Select Option</option>
                         <option>Bar & Game Room</option>
                         <option>Bedroom</option>
@@ -58,7 +66,7 @@
                     Manufacturer Cost:
                 </td>
                 <td>
-                    <input type="text" placeholder="manufacturercost" name="Manufacturercost">
+                    <input type="text" placeholder="Manufacturercost" name="pdata[Manufacturercost]">
                 </td>
             </tr>
             <tr>
@@ -66,7 +74,7 @@
                     Shipping Cost:
                 </td>
                 <td>
-                    <input type="text" placeholder="Shippingcost" name="Shippingcost">
+                    <input type="text" placeholder="Shippingcost" name="pdata[Shippingcost]">
                 </td>
             </tr>
             <tr>
@@ -74,7 +82,7 @@
                     Total Cost:
                 </td>
                 <td>
-                    <input type="text" placeholder="total cost" name="Totalcost">
+                    <input type="text" placeholder="total cost" name="pdata[Totalcost]">
                 </td>
             </tr>
             <tr>
@@ -82,7 +90,7 @@
                    Price:
                 </td>
                 <td>
-                    <input type="text" placeholder="price RS." name="Price">
+                    <input type="text" placeholder="price RS." name="pdata[Price]">
                 </td>
             </tr>
             <tr>
@@ -90,7 +98,7 @@
                     Status:
                 </td>
                 <td>
-                    <select name="Statusdetails" id="statusdetails">
+                    <select name="pdata[Status]" id="statusdetails">
                         <option>Select Option</option>
                         <option>Enable</option>
                         <option>Disable</option>
@@ -102,7 +110,7 @@
                     Created At:
                 </td>
                 <td>
-                    <input type="date" name="Created_At">
+                    <input type="date" name="pdata[Created_At]">
                 </td>
             </tr>
             <tr>
@@ -110,31 +118,18 @@
                     Updated At:
                 </td>
                 <td>
-                    <input type="date" name="Updated_cost">
+                    <input type="date" name="pdata[Updated_At]">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="submit"  value="Submit">   <!--value mein jo hoga woh button pein display hoga just like placeholder-->
-                    <input type="reset" value="Reset">
+                    <button type="submit" name="insert">Insert</button>  <!--value mein jo hoga woh button pein display hoga just like placeholder-->
+                    <button type="submit" name="update">Update</button>
+                    <button type="submit" name="delete">Delete</button>
                 </td>
             </tr>
+
         </table>
     </form>
-
-
-
-
-
 </body>
-
-
-
-
-
-
-
-
-
-
 </html>
