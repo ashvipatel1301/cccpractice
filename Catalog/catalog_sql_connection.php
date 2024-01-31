@@ -1,11 +1,9 @@
 <?php
-$product_data=$_POST['pdata'];
-include_once('catalog_sql_function.php');
+// $product_data=$_POST['pdata'];
 $host="localhost";
 $root="root";
 $password="";
 $db="ccc_practice";
-
 $conn=mysqli_connect($host,$root,$password,$db);
 try{
 if($conn){
@@ -15,7 +13,7 @@ if($conn){
     echo "Error in connection".mysqli_connect_error();
 
 }
-
+this is for button click actions 
 if(isset($_POST['insert'])){
     $product_data=$_POST['pdata'];
     $sql1=insert('ccc_product',$product_data);
@@ -49,17 +47,4 @@ elseif(isset($_POST['delete'])){
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

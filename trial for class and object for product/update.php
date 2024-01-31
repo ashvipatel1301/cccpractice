@@ -1,17 +1,19 @@
+<?php
+?>
 <!DOCTYPE html>
 <head>
    <title>HTML FORM PRACTICE</title>
 </head>
 <body>
     <h1 style=text-align:center>Product Details Form Template</h1>
-    <form action="catalog_product_list.php" method="post">
+    <form action="insert_call.php" method="post">
         <table>
             <tr>
                 <td>
                     Product ID:
                 </td>
                 <td>
-                    <input type="number" placeholder="Product ID" name="pdata[product_id]">
+                    <input type="number" placeholder="Product ID" name="pdata[Product_id]">
                 </td>
             </tr>
             <tr>
@@ -123,9 +125,8 @@
             </tr>
             <tr>
                 <td>
-                    <button type="submit" name="insert">Insert</button>  <!--value mein jo hoga woh button pein display hoga just like placeholder-->
-                    <button type="submit" name="update">Update</button>
-                    <button type="submit" name="delete">Delete</button>
+                   <input type="submit" value="update">
+                   <input type="reset" value="reset">
                 </td>
             </tr>
 
@@ -133,3 +134,18 @@
     </form>
 </body>
 </html>
+<!-- // include_once("sql_connection.php");
+// include_once("classes_with_functions.php");
+
+// $query=new builder();
+// $product_data=$_POST['pdata'];
+// $sql =$query->update('ccc_product',$product_data,['Product_id'=>5]);
+// // echo $sql;
+// $obj = new trial();
+// $output = $obj->execution($conn,$sql);
+// if($output==TRUE){
+//     echo "record is updated successfully";   
+//  }else{
+//      echo "record is not updated";
+//  } -->
+
