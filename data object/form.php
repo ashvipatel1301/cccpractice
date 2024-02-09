@@ -132,7 +132,7 @@
                     Created At:
                 </td>
                 <td>
-                    <input type="date" value="<?php echo $obj->getCreated_At('') ?>" name="pdata[Created_At]">
+                    <input type="date" value=<?php echo $obj->getCreated_At('') ?> name="pdata[Created_At]">
                 </td>
             </tr>
             <tr>
@@ -140,7 +140,7 @@
                     Updated At:
                 </td>
                 <td>
-                    <input type="date" value="<?php echo $obj->getUpdated_At('') ?>" name="pdata[Updated_At]">
+                    <input type="date" value= <?php echo $obj->getUpdated_At('') ?> name="pdata[Updated_At]">
                 </td>
             </tr>
             <tr>

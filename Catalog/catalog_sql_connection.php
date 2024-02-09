@@ -13,7 +13,7 @@ if($conn){
     echo "Error in connection".mysqli_connect_error();
 
 }
-this is for button click actions 
+//this is for button click actions 
 if(isset($_POST['insert'])){
     $product_data=$_POST['pdata'];
     $sql1=insert('ccc_product',$product_data);
