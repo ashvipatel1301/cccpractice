@@ -1,11 +1,13 @@
 <?php
+class  builder{
 
-$product_data=$_POST['pdata'];
+public $product_data=$_POST['pdata'];
 // $cat_name = $_POST['cdata'];     //when connection with category wala table
 // print_r($product_data);
 
 //--------------insert-----------
 public function insert($tableName,$data){    //data je form mathi lidho ae che
+
 
     $column = $value = [];
 
@@ -79,5 +81,6 @@ public function select($tableName,$data){
 return "SELECT {$column} FROM {$tableName}";
     }
 
+}
 }
 ?>

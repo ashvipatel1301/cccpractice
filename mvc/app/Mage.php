@@ -1,24 +1,28 @@
 <?php
 class Mage{
+    private static $registry=[];
+    private static $baseDir = 'C:\xampp\htdocs\String Function Practice\mvc';
+
     public static function init(){
-        // $requestModel = new Core_Model_Request();
-        // $uri = $requestModel->getRequestUri();
-        // echo $uri;
-        // Mage::getModel("core/request"); 
-        $requestModel = Mage::getModel("core/request");    
-        echo  get_class($requestModel);     //this get_class method return class name of object
+       $frontController = new Core_Controller_Front();
+       $frontController->init();
         
     }
     public static function getSingleton($className){
 
     }
-    public static function getModel($modelName){
-        $str =explode("/",$modelName);
+    public static function getModel($className){
+        $str =explode("/",$className);
         $str1 =ucfirst($str[0]);
         $str2 =ucfirst($str[1]);
-        $output = $str1. "_Model_" .$str2;   //class name 
-        // echo $output;
-        return new $output;        //class's object
+        $className = $str1. "_Model_" .$str2;   //class name 
+        // echo $className;
+        return new $className;        //class's object
+    }
+    public static function getBlock($className){
+        $className = str_replace("/","_Block_",$className);
+        $className = ucwords(str_replace("/","_",$className),'_');
+        return new $className;
     }
     public static function register($key,$value){
 
@@ -27,7 +31,10 @@ class Mage{
 
     }
     public static function getBaseDir($subDir = null){
-
+        if($subDir){
+             return self::$baseDir. '/' .$subDir;
+        }
+       return self::$baseDir;
     }
 }
 
