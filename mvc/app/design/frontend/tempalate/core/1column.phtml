@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <div class='head'><?php $this->getChildHtml('head'); ?></div>
 </head>
 <body>
-        <!-- <div class="header"><?php  $this->getChild('header')->toHtml(); ?> </div> -->
+        <!-- <?php print_r($this->getRequest()->getParams()); ?> this is for url pid print--> 
+        <!-- <div class="header"><?php  $this->getChild('header')->toHtml(); ?> </div> --> 
         
         <div class="header"><?php  $this->getChildHtml('header')?> </div>
-        <div class="Content">
-        <div class="Content">Left</div>
-        <div class="Content">content</div>
-        <div class="Content">Right</div>
-
-        </div>
-        <div class="Footer"><?php $this->getChild('footer')?></div>
+        <div class="content"><?php $this->getChildHtml('content');?></div>
+        <!-- <div class="content">Left</div>
+        <div class="content">Content</div>
+        <div class="content">Right</div>  -->
+        
+        <div class="Footer"><?php $this->getChildHtml('footer')?></div>
 </body>
 </html>

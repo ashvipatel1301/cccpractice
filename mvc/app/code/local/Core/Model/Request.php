@@ -8,7 +8,7 @@ class Core_Model_Request{
 		$uri = array_filter(explode("?", $uri));
 		$uri = $uri[0];
 	
-	// echo $uri;
+	   // echo $uri;
 	   $uri = array_filter(explode("/", $uri));
 
 		$this->_moduleName     = isset($uri[0]) ? $uri[0] :'page'; // url page/index/test then 1 indext par module name
