@@ -3,7 +3,7 @@ class Core_Controller_Front{
     public function init(){
         $request = Mage::getModel('core/request');  //return the object of Core_Model_Request
         $actionName = $request->getActionName() . 'Action';  //test Action
-        $fullClassName  = $request->getFullControllerClass ();
+        $fullClassName  = $request->getFullControllerClass (); //uri class name
         // echo $fullClassName;
         $fullClassName = new $fullClassName();
 
