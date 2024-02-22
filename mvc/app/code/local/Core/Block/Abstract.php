@@ -25,16 +25,18 @@ class Core_Block_Abstract{
 
     }
     public function setData($data){
+      // $this->data->$data;
+      // return $this;
 
     }
-    public function getUrl($action = null,$controller=null,$params=[],$resetParams = false){
+    // public function getUrl($action = null,$controller=null,$params=[],$resetParams = false){
 
-    }
+    // }
     public function getRequest(){
         return Mage::getModel('core/request');
     }
     public function render(){
-       include Mage::getBaseDir('app') . '/design/frontend/tempalate/' . $this->getTemplate() ;
+      include Mage::getBaseDir('app') . '/design/frontend/tempalate/' . $this->getTemplate() ;
        
     }
 }

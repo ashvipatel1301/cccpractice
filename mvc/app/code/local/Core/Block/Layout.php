@@ -10,9 +10,9 @@ class Core_Block_Layout extends Core_Block_Template{
     public function prepareChildren(){
             $head=$this->createBlock('page/head');
             $this->addChild('head',$head);
-            
-            $heder=$this->createBlock('page/header');
-            $this->addChild('header',$heder);
+
+            $header=$this->createBlock('page/header');
+            $this->addChild('header',$header);
 
             $content= $this->createBlock('page/content');
             $this->addChild('content',$content);

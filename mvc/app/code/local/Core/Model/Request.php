@@ -14,9 +14,6 @@ class Core_Model_Request{
 		$this->_moduleName     = isset($uri[0]) ? $uri[0] :'page'; // url page/index/test then 1 indext par module name
 		$this->_controllerName = isset($uri[1]) ? $uri[1] :'index';
 		$this->_actionName     = isset($uri[2]) ? $uri[2] :'index';
-
-		
-		
 	}
 
 	public function getParams($key = '') {
@@ -58,6 +55,10 @@ class Core_Model_Request{
 		$request = str_replace('/String%20Function%20Practice/mvc/','',$request);
 		// echo $request;
 		return $request;
+	}
+	public function getUrl($path){
+		return 'http://localhost/String Function Practice/mvc/'.$path;
+		
 	}
 	public function getActionName(){
 		return $this->_actionName;

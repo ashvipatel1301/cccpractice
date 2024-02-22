@@ -1,0 +1,57 @@
+
+
+    <form action="<?php echo $this->getUrl("admin/catalog_product/save");?>" method="post" class="product">
+    <label for="sku">sku</label>
+    <input type="text" id="sku" name="pdata[sku]" value="" />
+
+    <label for="productName">Product Name</label>
+    <input type="text" id="productName" name="pdata[name]" value="" />
+
+    <label for="Color">Color</label>
+    <input type="text" id="color" name="pdata[color]" value="" />
+
+    <label for="size">size</label>
+    <input type="text" id="size" name="pdata[size]" value="" />
+
+    <label for="Description">Description</label>
+    <textarea id="description" name="pdata[description]" cols="30" rows="10"></textarea>
+
+    <label for="image link">image Link</label>
+    <input type="text" name="pdata[image_link]" id="imageLink">
+
+    <label for="link">Link</label>
+    <input type="text" name="pdata[link]" id="link">
+
+    <label for="category">Category</label>
+    <select name="pdata[category_id]" id="category_id">
+        <option value="1">1</option>
+    </select>
+
+    <label for="price">Price</label>
+    <input type="text" id="price" name="pdata[price]" value="" />
+
+    <label for="manufacturerCost">Manufacturer Cost</label>
+    <input type="text" id="manufacturerCost" name="pdata[mfr_cost]" value="" />
+
+    <label for="shippingCost">Shipping Cost</label>
+    <input type="text" id="shippingCost" name="pdata[shipping_cost]" value="" />
+
+    <label for="totalCost">Total Cost</label>
+    <input type="text" id="totalCost" name="pdata[total_cost]" value="" />
+
+    <label for="margin percentage">Margin Percentage</label>
+    <input type="text" id="marginPercentage" name="pdata[margin_percentage]" value="" />
+
+    <label for="min price">Min Price</label>
+    <input type="text" id="minPrice" name="pdata[min_price]" value="" />
+
+    <label for="status">Status</label>
+    <select name="pdata[status]" id="status">
+        <option value="1">enable</option>
+        <option value="0">disable</option>
+    </select>
+
+    <input type="submit" name="" value="submit" />
+</form>
+
+    

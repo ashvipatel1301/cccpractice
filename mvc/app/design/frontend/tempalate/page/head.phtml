@@ -10,7 +10,7 @@
 <?php $css = $this->getCss(); ?>
 <?php if(count($css)): ?>
     <?php foreach($css as $_css):?>
-        <script type="" src="<?php echo $_css;?>"></script>
+        <link rel="stylesheet" href="<?php echo $_css;?>">
         <?php endforeach;?>
 <?php endif ?>
 

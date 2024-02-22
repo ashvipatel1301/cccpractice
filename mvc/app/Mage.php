@@ -20,8 +20,10 @@ class Mage{
         return new $className;        //class's object
     }
     public static function getBlock($className){
-        $className = str_replace("/","_Block_",$className);
-        $className = ucwords(str_replace("/","_",$className),'_');
+        
+        $uriArray = explode("/", $className);
+        $className = ucfirst($uriArray[0])."_"."Block"."_".ucfirst($uriArray[1]);
+        // echo "From GetBlock".$className."<br>";
         return new $className;
     }
     public static function register($key,$value){
@@ -29,12 +31,16 @@ class Mage{
     }
     public static function registry($key){ 
 
+        
     }
     public static function getBaseDir($subDir = null){
         if($subDir){
              return self::$baseDir. '/' .$subDir;
         }
        return self::$baseDir;
+    }
+    public static function getBaseUrl(){
+        return "http://localhost/String Function Practice/mvc/";
     }
 }
 

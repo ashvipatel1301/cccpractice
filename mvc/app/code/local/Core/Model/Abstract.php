@@ -1,67 +1,109 @@
 <?php
-class Core_Model_Abstract{
-    protected $data = [];
+class Core_Model_Abstract
+{
+    protected $_data = [];
     protected $resourceClass = '';
     protected $collectionClass = '';
     protected $resource = null;
     protected $collection = null;
-public function __construct(){
+    public function __construct()
+    {
+        $this->init();    //this will call Product_Model_Product's init method as $this call child's method
+    }
+    public function init()
+    {
 
-}
-public function setResourceClass($resourceClass){
+    }
+    public function setResourceClass($resourceClass)
+    {
 
-}
-public function setCollectionClass($collectionClass){
+    }
+    public function setCollectionClass($collectionClass)
+    {
 
-}
-public function setId($id){
+    }
+    public function setId($id)
+    {
+        $this->_data[$this->getResource()->getPrimaryKey()] = $id;
+        return $this;
+    }
+    public function getId()
+    {
+        echo $this->_data[$this->getResource()->getPrimaryKey()];
 
-}
-public function getId($id){
+    }
+    public function getResource()
+    {
+        return new $this->resourceClass();
+    }
+    public function getCollection()
+    {
 
-}
-public function getResource(){
+    }
 
-}
-public function getCollection(){
+    public function __set($key, $value)
+    {
 
-}
-public function getPrimaryKey(){
+    }
+    public function __get($key)
+    {
 
-}
-public function getTableName(){
+    }
+    public function __unset($key)
+    {
 
-}
-public function __set($key, $value){
+    }
+    public function __call($name, $args)
+    {
+        // $name = strtolower(substr($name, 3));
+        $name = $this->camelTodashed(substr($name, 3));   //remove get from this
+        return isset($this->_data[$name])
+            ? $this->_data[$name]
+            : "";
+    }
+    public function camelTodashed($className)
+    {
+        return strtolower(preg_replace('/([a-zA-Z])(?=[A-Z])/', '$1_', $className));
+    }
 
-}
-public function __get($key){
+    public function getData($key = null)
+    {
+        return $this->_data;
+    }
+    public function setData($data)
+    {
+        $this->_data = $data;
+        return $this;  //catalog_model_product 
+    }
+    public function addData($key, $value)
+    {
 
-}
-public function __unset($key){
+    }
+    public function removeData($key = null)
+    {
 
-}
-public function getData($key=null){
+    }
+    public function save()
+    {
+        echo 33;
+        print_r($this->getData());
+        $this->getResource()->save($this);
+        return $this;
 
-}
-public function setData($data){
+    }
+    public function load($id, $column = null)
+    {
+        // echo get_class($this->getResource()->getTableName();
+        // echo $_tableName = $this->getResource()->getTableName();
+        $this->_data = $this->getResource()->load($id, $column);
+        return $this;
+        //   echo "SELECT * FROM {$this->getResource()->getTableName()} WHERE {$this->getResource()->getPrimaryKey()} LIMIT 1";
+        
+    }
+    public function delete()
+    {
 
-}
-public function addData($key, $value){
-
-}
-public function removeData($key = null){
-
-}
-public function save(){
-
-}
-public function load($id, $column=null){
-
-}
-public function delete(){
-
-}
+    }
 
 }
 ?>
