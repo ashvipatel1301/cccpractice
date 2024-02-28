@@ -18,8 +18,24 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action{
         $child->addChild('form',$productForm);
         // print_r($child);//die();
         $layout->toHtml();
-  
+    }
+    public function deleteAction()
+    {
+        // $id = $this->getRequest()->getParams('id',0);
+        // echo $id;
+        $productModel = Mage::getModel('catalog/product')->load($this->getRequest()->getParams('id', 0))->delete(); // this will return data which  thid id
+    }
+    public function listAction()
+    {
+        $layout = $this->getLayout();
+        
+        $layout->getChild('head')->addJs('js/page.js');
+        $layout->getChild('head')->addJs('js/head.js');
 
+        $child = $layout->getChild('content');
+        $productList =  $layout->createBlock('catalog/admin_product_list');
+        $child->addChild('productList',$productList);
+        $layout->toHtml();
     }
     public function saveAction(){
         // echo 2323;

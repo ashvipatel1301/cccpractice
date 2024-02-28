@@ -37,18 +37,29 @@ class Core_Model_DB_Adapter
     }
     public function insert($query)
     {
-        if(mysqli_query($this->connect(), $query)){
+        if (mysqli_query($this->connect(), $query)) {
             return mysqli_insert_id($this->connect());   //this is inbuilt fun which will insert record in database table 
-        }else{
+        } else {
             return false;
         }
     }
     public function update($query)
     {
+        if (mysqli_query($this->connect(), $query)) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
     public function delete($query)
     {
+        if (mysqli_query($this->connect(), $query)) {
+            return true;
+
+        } else {
+            return false;
+        }
 
     }
     public function query($query)

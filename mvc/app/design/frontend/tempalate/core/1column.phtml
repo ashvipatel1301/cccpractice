@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <?php
+        $footerCss = Mage::getBaseUrl() . 'skin/css/product/footer.css';
+        $this->getChild('head')->addCss($footerCss);
+        $headerCss = Mage::getBaseUrl() . 'skin/css/product/header.css';
+        $this->getChild('head')->addCss($headerCss);
+    ?>
     <div class='head'><?php $this->getChildHtml('head'); ?></div>
 </head>
 <body>

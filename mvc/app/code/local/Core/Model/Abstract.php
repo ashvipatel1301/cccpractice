@@ -29,7 +29,10 @@ class Core_Model_Abstract
     }
     public function getId()
     {
-        echo $this->_data[$this->getResource()->getPrimaryKey()];
+       
+        return isset($this->_data[$this->getResource()->getPrimaryKey()])
+        ?$this->_data[$this->getResource()->getPrimaryKey()]
+        :false;
 
     }
     public function getResource()
@@ -102,6 +105,8 @@ class Core_Model_Abstract
     }
     public function delete()
     {
+        $this->getResource()->delete($this);
+        return $this;
 
     }
 

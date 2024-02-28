@@ -1,6 +1,7 @@
 <?php
 class Mage{
     private static $registry=[];
+    private static $_singleton = [];
     private static $baseDir = 'C:\xampp\htdocs\String Function Practice\mvc';
 
     public static function init(){
