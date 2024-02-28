@@ -1,0 +1,98 @@
+<h2>list content</h2>
+<pre>
+<?php
+$productCollection = Mage::getModel('catalog/product')->getCollection();
+//->addFieldToFilter('color','silver');
+
+//->addFieldToFilter('color',['like' => 'silver']);
+// ->addFieldToFilter('color',['gt' => 'silver']);
+// addFieldToFilter('color',['in' => 'silver']);
+// addFieldToFilter('color',['between' => 'silver']);
+
+// foreach($productCollection->getData() as $product) {
+//     var_dump($product->getName());
+//     }
+//echo get_class($productCollection);   //Catalog_Model_Resource_Collection_Product
+?>
+<?php
+    // $productModel = Mage::getModel('catalog/product');?>
+
+    <table>
+        <tr>
+            <th>Product_ID</th>
+            <th>SKU</th>
+            <th>Product Name</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Description</th>
+            <th>Image-Link</th>
+            <th>Link</th>
+            <th>Category_ID</th>
+            <th>Price</th>
+            <th>mfr_cost</th>
+            <th>Shipping Cost</th>
+            <th>Total Cost</th>
+            <th>margin_percentage</th>
+            <th>Min_price</th>
+            <th>Status</th>
+            <th colspan=2>Actions</th>
+        </tr>
+    <?php 
+    foreach($productCollection->getData() as $productModel) :?>
+        <tr>
+            <td>
+                <?php print_r($productModel->getId());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getSku());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getName());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getColor());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getSize());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getDescription());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getImageLink());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getLink());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getCategoryId());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getPrice());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getMfrCost());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getShippingCost());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getTotalCost());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getMarginPercentage());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getMinPrice());?>
+            </td>
+            <td>
+                <?php print_r($productModel->getStatus());?>
+            </td>
+            <td><button class="edit-button"><a href='<?php echo $this->getUrl('admin/catalog_product/form')?>?id=<?php echo $productModel->getProductId()?>'>Edit</a></button></td>
+            <td><button class="delete-button"><a href='<?php echo $this->getUrl('admin/catalog_product/delete')?>?id=<?php echo $productModel->getProductId()?>'>Delete</a></button></td>
+   
+        </tr>
+        <?php endforeach; ?>
+</table>
+</div>
+            

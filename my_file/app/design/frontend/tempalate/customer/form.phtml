@@ -1,0 +1,61 @@
+<h2>form</h2>
+<?php
+        $customer_model=$this->getCustomer();
+?>
+ <form action="<?php echo $this->getUrl("customer/account/save");?>" method="post" class="product"> 
+
+   <input type="hidden"  value="<?php echo $customer_model->getId();?>"name="cdata[customer_id]"  />  
+
+    <label for="customer_email">Customer Email</label>
+    <input type="text" id="customer_email" name="cdata[customer_email]" value="<?php echo $customer_model->getCustomerEmail();?>"/>
+
+    <label for="password">Password</label>
+    <input type="text" id="password" name="cdata[password]" value="<?php echo $customer_model->getpassword();?>" />
+
+    <label for="first_name">First Name</label>
+    <input type="text" id="first_name" name="cdata[first_name]" value="<?php echo $customer_model->getFirstName();?>" />
+
+    <label for="last_name">Last Name</label>
+    <input type="text" id="last_name" name="cdata[last_name]" value="<?php echo $customer_model->getLastName();?>" />
+
+    <label for="billing_address">Billing Address</label>
+    <input type="text" id="billing_address" name="cdata[billing_address]" value="<?php echo $customer_model->getBillingAddress();?>" />
+
+    <label for="billing_city">Billing City</label>
+    <input type="text" id="billing_city" name="cdata[billing_city]" value="<?php echo $customer_model->getBillingCity();?>"/>
+
+    <label for="billing_region">Billing Region</label>
+    <input type="text" name="cdata[billing_region]" value="<?php echo $customer_model->getBillingRegion();?>"id="billing_region">
+
+    <label for="billing_country">Billing Country</label>
+    <input type="text" name="cdata[billing_country]" value="<?php echo $customer_model->getBillingCountry();?>"id="billing_country">
+
+    <label for="billing_phone">Billing Phone</label>
+    <input type="text" name="cdata[billing_phone]" value="<?php echo $customer_model->getBillingPhone();?>"id="billing_phone">
+
+    <label for="shipping_address">Shipping Address</label>
+    <input type="text" name="cdata[shipping_address]" value="<?php echo $customer_model->getShippingAddress();?>"id="shipping_address">
+
+    <label for="shipping_city">Shipping City</label>
+    <input type="text" name="cdata[shipping_city]" value="<?php echo $customer_model->getShippingCity();?>"id="shipping_city">
+
+    <label for="shipping_region">Shipping Region</label>
+    <input type="text" name="cdata[shipping_region]" value="<?php echo $customer_model->getShippingRegion();?>"id="shipping_region">
+   
+
+    <label for="shipping_country">Shipping Country</label>
+    <input type="text" id="shipping_country" name="cdata[shipping_country]" value="<?php echo $customer_model->getShippingCountry();?>" />
+
+    <label for="shipping_phone">Shipping Phone</label>
+    <input type="text" id="shipping_phone" name="cdata[shipping_phone]" value="<?php echo $customer_model->getShippingPhone();?>" />
+
+    <label for="default">default</label>
+    <select name="cdata[default]" id="default">
+        <option value="1">enable</option>
+        <option value="0">disable</option>
+    </select>
+   
+
+    <input type="submit" name="" value="submit" />
+ </form> 
+

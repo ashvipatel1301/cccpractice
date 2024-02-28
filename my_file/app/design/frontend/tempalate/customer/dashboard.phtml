@@ -1,0 +1,50 @@
+<h2>dashbord</h2>
+<?php
+
+$customerModel =$this->getCustomerData();
+// print_r($customerModel);
+//->addFieldToFilter('color','silver');
+?>
+
+     <table>
+     <tr>
+         <th>Customer_ID</th>
+         <th>Customer_Email</th>
+         <th>Last Name</th>
+         <th>Billing_Address</th>
+         <th>Billing_City</th>
+         <th>Billing_Country</th>
+         <th>Billing_Phone</th>
+         <th>Shipping_Address</th>
+         <th>Shipping_City</th>
+         <th>Shipping_Region</th>
+         <th>Shipping_Country</th>
+         <th>Shipping_Phone</th>
+         <th>default</th>
+         <th>password</th>
+         <th colspan=2>Actions</th>
+     </tr>
+     <tr>
+        <td><?php echo $customerModel->getCustomerId();?></td>
+        <td><?php echo $customerModel->getCustomerEmail();?></td>
+        <td><?php echo $customerModel->getLastName();?></td>
+        <td><?php echo $customerModel->getBillingAddress();?></td>
+        <td><?php echo $customerModel->getBillingCity();?></td>
+        <td><?php echo $customerModel->getBillingCountry();?></td>
+        <td><?php echo $customerModel->getBillingPhone();?></td>
+        <td><?php echo $customerModel->getShippingAddress();?></td>
+        <td><?php echo $customerModel->getShippingCity();?></td>
+        <td><?php echo $customerModel->getShippingRegion();?></td>
+        <td><?php echo $customerModel->getShippingCountry();?></td>
+        <td><?php echo $customerModel->getShippingPhone();?></td>
+        <td><?php echo $customerModel->getDefault();?></td>
+        <td><?php echo $customerModel->getPassword();?></td>
+        <td><button class="edit-button"><a href='<?php echo $this->getUrl('customer/account/register')?>?id=<?php echo $customerModel->getCustomerId()?>'>Edit</a></button></td> 
+        <td><button class="delete-button"><a href='<?php echo $this->getUrl('customer/account/delete')?>?id=<?php echo $customerModel->getCustomerId()?>'>Delete</a></button></td> 
+   
+        </tr>
+    </tr>
+ 
+ 
+</table>
+</div>

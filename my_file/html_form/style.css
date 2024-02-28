@@ -1,0 +1,129 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  /* background-color: #f1e5e5; */
+}
+p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+.product {
+  max-width: 600px;
+  margin: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 30% auto;
+}
+
+label {
+  display: block;
+  margin: 8px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="radio"] {
+  margin: 5px;
+  width: auto;
+}
+
+input[type="submit"] {
+  grid-column: span 2;
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* product_list page */
+
+.page {
+  width: auto;
+}
+
+.product_list {
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-size: 18px;
+  border: 1px solid black;
+}
+th,
+td {
+  font-weight: bold;
+  border: 1px solid black;
+  padding: 16px;
+  text-align: center;
+}
+
+td {
+  font-weight: lighter;
+}
+
+a {
+  padding: 12px;
+  color: black;
+  text-decoration: none;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 4px;
+}
+
+.user {
+  padding: 12px;
+  text-decoration: none;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 4px;
+  color: black;
+  background-color: lightblue;
+}
+
+.product_list .edit {
+  background-color: lightblue;
+}
+
+.product_list .delete {
+  background-color: crimson;
+}
+
+a:hover {
+  background-color: #d3d3d3;
+}
+
+.product_P {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* category List */
+
+.category_list {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-size: 18px;
+  border: 1px solid black;
+}
