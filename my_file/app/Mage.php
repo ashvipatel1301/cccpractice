@@ -38,6 +38,7 @@ class Mage{
     }
     public static function getBaseUrl(){
         return "http://localhost/String Function Practice/my_file/";
+        
     }
     //when we use getModel() then everytime it will create a object of same class
     //istead of that we use  this so it will create a obj of that class and then we will use everytiome 

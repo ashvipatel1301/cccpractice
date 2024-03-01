@@ -1,9 +1,11 @@
 <?php
-class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
+class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
 {
+    protected $_allowAction = [];
     public function formAction()
     {
-        // echo 12;
+       
+        
         $layout = $this->getLayout();
 
         $layout->getChild('head')->addJs('js/page.js');
@@ -30,15 +32,15 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
         $productModel = Mage::getModel('catalog/product')
             ->load($this->getRequest()->getParams('id', 0))  // this will return data which  thid id
             ->delete();
-        // $productModel->delete($id);
+        // $productModel->delete($id);  
 
     }
     public function listAction()
     {
         $layout = $this->getLayout();
         
-        $layout->getChild('head')->addJs('js/page.js');
-        $layout->getChild('head')->addCss(Mage::getBaseUrl() . 'skin/css/product/list.css');
+        //$layout->getChild('head')->addJs('js/page.js');
+        // $layout->getChild('head')->addCss(Mage::getBaseUrl() . 'skin/css/product/list.css');
 
         $child = $layout->getChild('content');
         $productList =  $layout->createBlock('catalog/admin_product_list');
@@ -51,35 +53,35 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Front_Action
     public function saveAction()
     {
         // echo 2323;
-        $data = $this->getRequest()->getParams('pdata');   //getrequest aetle request no obj and aena par params method cll karai
+    //$data = $this->getRequest()->getParams('pdata');   //getrequest aetle request no obj and aena par params method cll karai
         // echo "<pre>";   //anathi proper line ma array ma avase
         // print_r($data);  //return form data 
 
         //aa data ae database ma submit karavano che soo save fun jose 
-        $productData = Mage::getModel('catalog/product');
+    //$productData = Mage::getModel('catalog/product');
         // print_r($productData);
-        $productData->setData($data);
+    //$productData->setData($data);
         // print_r($productData->getData());  //return data
-        $productData->save();
+    //$productData->save();
         
-        die;
-    //      try{
-    //         if(!$this->getRequest()->isPost()){
-    //             throw new Exception("request is not Valid");
-    //         }
-    //         $data = $this->getRequest()->getParams('pdata');
-    //         if(!isset($data['price']) || !is_numeric($data['price']))
-    //         {
-    //             throw new Exception("price is in numeric");
-    //         }
-    //         // print_r("Data from get params <br>",$data);
-    //         // $id = (isset($data['product_id'])) ? $data['product_id']:0;
-    //         $productModel = Mage::getModel("catalog/product");
-    //         $productModel->setData($data)->save();
-    //     }
-    //     catch(Exception $e){
-    //         var_dump($e->getMessage());
-    //     }
+        // die;
+         try{
+            if(!$this->getRequest()->isPost()){
+                throw new Exception("request is not Valid");
+            }
+            echo "<pre>";
+            $data = $this->getRequest()->getParams('pdata');
+            if(!isset($data['price']) || !is_numeric($data['price']))
+            {
+                throw new Exception("price must be in numeric");
+            }
+            }
+        catch(Exception $e){
+            var_dump($e->getMessage());
+        }
+        $productModel = Mage::getModel("catalog/product");
+        $productModel->setData($data)->save();
+    
         
     }
 

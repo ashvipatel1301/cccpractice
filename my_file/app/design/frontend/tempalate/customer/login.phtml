@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+
+
     <div class="login-container">
         <form action="" method="post" class="login-form">
             <h2>Login</h2>
@@ -19,8 +12,30 @@
                 <input type="password" id="password" name="cdata[password]" required>
             </div>
             <button type="submit">Login</button>
+            
+            <!-- <input type="button" onclick="loginAction(this)" value="Login" class="button"> -->
             <a href="<?php echo $this->getUrl('customer/account/register')?>">New User,Register Here</a>
         </form>
     </div>
-</body>
-</html>
+    <!-- <script type="text/javascript">
+	function loginAction(btn) {
+		//console.log($('#login-form'));
+		var form = $($('#login-form')[0]);
+		console.log(form.serialize());
+		$.ajax({
+			url: form.action,
+			type:'POST',
+			// contentType: "application/json",
+			data: form.serialize()	
+		}).done(function(response) {
+			var output = JSON.parse(response);
+			// alert(response)
+			alert(output.type)
+			$('#message')[0].innerHTML = output.message;
+			alert(output.message)
+			$( this ).addClass( "done" );
+			$( this ).addClass( "done" );
+		});
+	}
+</script> -->
+

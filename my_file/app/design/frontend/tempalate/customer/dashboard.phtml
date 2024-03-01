@@ -6,7 +6,9 @@ $customerModel =$this->getCustomerData();
 //->addFieldToFilter('color','silver');
 ?>
 
-     <table>
+<div class="container" style="margin-top:20px;">
+    <div class="table"> 
+        <table class="table table-striped overflow-x-auto">
      <tr>
          <th>Customer_ID</th>
          <th>Customer_Email</th>
@@ -22,10 +24,13 @@ $customerModel =$this->getCustomerData();
          <th>Shipping_Phone</th>
          <th>default</th>
          <th>password</th>
-         <th colspan=2>Actions</th>
+         <th>Update</th>
+        <th>Delete</th>
      </tr>
      <tr>
-        <td><?php echo $customerModel->getCustomerId();?></td>
+        <td>
+            <?php echo $customerModel->getCustomerId();?>
+        </td>
         <td><?php echo $customerModel->getCustomerEmail();?></td>
         <td><?php echo $customerModel->getLastName();?></td>
         <td><?php echo $customerModel->getBillingAddress();?></td>
@@ -39,11 +44,19 @@ $customerModel =$this->getCustomerData();
         <td><?php echo $customerModel->getShippingPhone();?></td>
         <td><?php echo $customerModel->getDefault();?></td>
         <td><?php echo $customerModel->getPassword();?></td>
-        <td><button class="edit-button"><a href='<?php echo $this->getUrl('customer/account/register')?>?id=<?php echo $customerModel->getCustomerId()?>'>Edit</a></button></td> 
-        <td><button class="delete-button"><a href='<?php echo $this->getUrl('customer/account/delete')?>?id=<?php echo $customerModel->getCustomerId()?>'>Delete</a></button></td> 
+        <td>
+                    <a href="<?php echo $this->getUrl('customer/account/register?id=') . $customerModel->getCustomerId() ?>"
+                        class=""><button type="button" class="btn btn-outline-success">Update</button></a>
+        </td>
+                <td>
+                    <a href="<?php echo $this->getUrl('customer/account/delete?id=') . $customerModel->getCustomerId() ?>"
+                        class=""><button type="button" class="btn btn-outline-danger">Delete</button></a>
+                </td>
+        <!-- <td><button class="edit-button"><a href='<?php //echo $this->getUrl('customer/account/register')?>?id=<?php echo $customerModel->getCustomerId()?>'>Edit</a></button></td> 
+        <td><button class="delete-button"><a href='<?php //echo $this->getUrl('customer/account/delete')?>?id=<?php echo $customerModel->getCustomerId()?>'>Delete</a></button></td>  -->
    
         </tr>
-    </tr>
+
  
  
 </table>

@@ -35,7 +35,7 @@ class Core_Model_Resource_Abstract
     }
     public function save(Core_Model_Abstract $modelClass)
     {
-        // echo 55;
+        echo 55;
         $data = $modelClass->getData();
         print_r($data);
         // if (isset($data[($this->getPrimaryKey())])) 

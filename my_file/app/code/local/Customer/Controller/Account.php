@@ -1,16 +1,25 @@
 <?php
 class Customer_Controller_Account extends Core_Controller_Front_Action
 {
-    // protected $_loginRequiredAction = [
-    //     'dashboard'
-    // ];
-    public function init(){
-       
-        // $action = $this->getRequest()->getActionName();
-        // if(in_array($action,$this->_loginRequiredAction)){
-        //     $customerID = Mage::getSingleton('core/session')->get('logged_in_customer_id');
-        //     if()
-
+    protected $_loginRequiredAction = [
+        'dashboard'
+    ];
+    public function __construct(){
+        $this->init();
+    }
+    public function init()
+    {
+        
+        $action=$this->getRequest()->getActionName();
+        if(in_array($action,$this->_loginRequiredAction))
+        {
+            $customerId=Mage::getSingleton("core/session")->get("logged_in_customer_id");
+            if(!$customerId)
+            {
+                $this->setRedirect("customer/account/login");
+                // exit();
+            }
+        }
     }
     public function registerAction()
     { 
@@ -49,73 +58,78 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
             ->load($this->getRequest()->getParams('id', 0))  // this will return data which  thid id
             ->delete();
     }
-    public function loginAction(){
-        $session = Mage::getSingleton('core/session');
-        $layout = $this->getLayout();
-        $loginCss = Mage::getBaseUrl() . 'skin/css/product/loginpage.css';
-        $layout->getChild('head')->addCss($loginCss);
+   
+        public function loginAction(){
+            
+        //$session=Mage::getSingleton("core/session");
+        if (!$this->getRequest()->isPost()) 
+        {
+            $layout = $this->getLayout();
+            //print_r($layout);
+            $layout->getChild('head')->addCss(Mage::getBaseUrl() . 'skin/css/product/loginpage.css');
+            //$layout->getChild('head')->addJs(Mage::getBaseUrl() . 'ahi jquery ni cdn download karine e file skin ma js ma mukvi');
+    
+            $child = $layout->getChild('content');
+            $loginForm = $layout->createBlock('customer/login');
+            $child->addChild('loginform', $loginForm);
+            //print_r($layout);
+            $layout->toHtml();
+        }
+        else
+        {
+            try
+            {
+                $postData = $this->getRequest()->getParams('cdata');
+                $email = $postData['customer_email'];
+                $password = $postData['password'];
+                $data = Mage::getModel("customer/customer")->getCollection()
+                        ->addFieldToFilter("customer_email", $email)
+                        ->addFieldToFilter("password", $password);
+                // $data->getData();
+               // print_r($data);
+                $count = 0;
+                $customerId = 0;
+                foreach ($data->getData() as $d) 
+                {
+                    $count++;
+                    $customerId = $d->getId();
+                }
+                if ($count) 
+                {
+                    // echo "yay you logged in";
+                    Mage::getSingleton('core/session')->set("logged_in_customer_id", $customerId);
+                    //print_r($_SESSION);
+                    $this->setRedirect('customer/account/dashboard');
+                    
+                }
+                else
+                {
+                    echo "Wrong Credentials ! ";
+                    Mage::getSingleton('core/session')->remove('logged_in_customer_id');
+                }    
+            }
+            catch (Exception $e) 
+            {
+                var_dump($e->getMessage());
+            }
+        }
+    } 
 
-        $child = $layout->getChild('content');
        
-        $loginForm = $layout->createBlock('customer/login');//->setTemplate('product/form.phtml');
-        
-        $child->addChild('login', $loginForm);
-      
-        $layout->toHtml();
-
-        try{
-            if(!$this->getRequest()->isPost()){
-                throw new Exception('Request is not valid');
-        }
-        $postData = $this->getRequest()->getParams('cdata');
-        // print_r($postData);
-        $email = $postData['customer_email'];
-        $password = $postData['password'];
-        $data = Mage::getModel("customer/customer")->getCollection()
-        ->addFieldToFilter("customer_email", $email)
-        ->addFieldToFilter("password", $password);
-        // print_r($data->getData());
-
-        $count=0;
-        $customerId=0;
-        foreach($data->getData() as $d){
-            $count++;
-            $customerId = $d->getId();
-        }
-        // echo $customerId;
-        if($count){
-            echo "great!...You logged in";
-            $session->set("logged_in_customer_id",$customerId);
-            // print_r($_SESSION);
-        }else{
-            echo "session destroyed";
-            session_destroy();
-    }
-    }
-        catch(Exception $e){
-            echo $e->getMessage();
-        }
-        
-        
-    }
+    
 
 public function dashboardAction(){
-        // echo "dashboard";
-        $customerID = Mage::getSingleton('core/session')->get('logged_in_customer_id');
-        // echo  $customerID;die;
-        if($customerID){
+
         $layout = $this->getLayout();
-        $layout->getChild('head')->addCss(Mage::getBaseUrl() . 'skin/css/product/list.css');
+        
         $child = $layout->getChild('content');
         $customerList =  $layout->createBlock('customer/dashboard');
         $child->addChild('customer',$customerList);
-        $layout->toHtml();
-        }else{
-            echo "Oops..!!,you are not allow to view this page";
-        }
+        $layout->toHtml();  
+    }
+}
 
 
-}
-}
+
 
 ?>

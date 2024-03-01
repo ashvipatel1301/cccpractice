@@ -10,7 +10,11 @@ class Core_Block_Template extends Core_Block_Abstract{
     
     public function toHtml(){
     //    echo "Ashvi";
-     $this->render();   //aa function ae 1column ma jay ae rite create karavanu che 
+        ob_start();
+        ob_clean();
+        $this->render();//aa function ae 1column ma jay ae rite create karavanu che 
+        ob_end_flush();
+        
 
     }
     public function addChild($key,$value){

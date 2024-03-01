@@ -2,28 +2,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <?php
-       $footerCss = Mage::getBaseUrl() . 'skin/css/product/footer.css';
-        $this->getChild('head')->addCss($footerCss);
-        $headerCss = Mage::getBaseUrl() . 'skin/css/product/header.css';
-        $this->getChild('head')->addCss($headerCss);
-
-    ?>
-    <div class="head"><?php $this->getChildHtml('head');?></div>  
-    <!-- we know that we have to include js and css files in head part as script -->
+     <?php $this->getChildHtml('head');?>  
 </head>
 <body>
-     <!-- <div class="header"><?php  $this->getChild('header')->toHtml(); ?> </div> 
-         -->
+  
          <div class="header"><?php  $this->getChildHtml('header');?> </div> 
         
     <div class="content"><?php $this->getChildHtml('content'); ?>
-        <!-- <div class="content">Left</div>
-        <div class="content">content</div>
-        <div class="content">Right</div> -->
+      
     </div>
     <div class="footer"><?php $this->getChildHtml('footer'); ?></div>
 </body>

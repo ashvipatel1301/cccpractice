@@ -1,14 +1,7 @@
 <!-- list phtml content -->
 <?php
-// It gives Catalog_Block_Admin_Product_List this class
+
 $productList = Mage::getModel('catalog/product')->getCollection();
-                                // ->addFieldToFilter('name','Bike')
-                                // ->addOrderFilter(['name'=>'DESC'])
-                                // ->addGroupFilter('name')
-                                // ->addLimitOffsetFilter(['LIMIT'=>'1']);
-                                // ->addFieldToFilter('price',['lt'=> 125])
-                                
-    // echo get_class($this);
 ?>
 <div class="container" style="margin-top:20px;">
     <div class="table"> 
@@ -30,8 +23,7 @@ $productList = Mage::getModel('catalog/product')->getCollection();
                 <th>Margin_Prcentage</th>
                 <th>Min_Price</th>
                 <th>Status</th>
-                <th>Update</th>
-                <th>Delete</th>
+                <th>View</th>
             </tr>
             <?php
             foreach($productList->getData() as $product)
@@ -87,13 +79,10 @@ $productList = Mage::getModel('catalog/product')->getCollection();
                     <?php print_r($product->getStatus()); ?>
                 </td>
                 <td>
-                    <a href="<?php echo $this->getUrl('admin/catalog_product/form?id=') . $product->getId() ?>"
-                        class=""><button type="button" class="btn btn-outline-success">Update</button></a>
+                    <a href="<?php echo $this->getUrl('catalog/product/view?id=') . $product->getId() ?>"
+                        class=""><button type="button" class="btn btn-outline-success">View</button></a>
                 </td>
-                <td>
-                    <a href="<?php echo $this->getUrl('admin/catalog_product/delete?id=') . $product->getId() ?>"
-                        class=""><button type="button" class="btn btn-outline-danger">Delete</button></a>
-                </td>
+                
             </tr>
             <?php }  ?>
         </table>
