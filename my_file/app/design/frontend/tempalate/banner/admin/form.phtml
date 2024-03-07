@@ -1,0 +1,29 @@
+<?php
+$bannerModel = $this->getBanner();
+?>
+<form action="<?php echo $this->getUrl("admin/banner/save"); ?>" enctype="multipart/form-data" method="post" class="product">
+    <input type="hidden"  value="<?php echo $bannerModel->getId(); ?>" name="bdata[banner_id]" />
+
+    <label for="image">Banner Title</label>
+    <input type="text" id="banner_title" name="bdata[banner_title]" value="<?php echo $bannerModel->getBannerTitle(); ?>">
+
+    <label for="image">Banner Image</label>
+    <input type="file" id="image" name="bdata[banner_image]" value="<?php echo $bannerModel->getBannerImage(); ?>">
+    
+    
+
+    <label for="status">Status</label>
+    <select name="bdata[status]" id="status">
+        <option value="1" <?php echo ($bannerModel->getStatus() == "E")?'selected' : '' ; ?>>enable</option>
+        <option value="0" <?php echo ($bannerModel->getStatus() == "D")?'selected' : '' ; ?>>disable</option>
+    </select>
+
+    <label for="status">Show On:</label>
+    <select name="bdata[show_on]" id="show_on">
+        <option value="0"<?php echo ($bannerModel->getShowOn() == "Home Page")?'selected' : '' ;?>>Home Page</option>
+        <option value="1"<?php echo ($bannerModel->getShowOn() == "Cart Page")?'selected' : '' ;?>>Cart Page</option>
+        <option value="2"<?php echo ($bannerModel->getShowOn() == "Checkout Page")?'selected' : '' ;?>>Checkout Page</option>
+    </select>
+
+    <input type="submit" name="" value="submit" />
+</form>

@@ -1,0 +1,37 @@
+<?php
+
+$id = $this->getRequest()->getParams('id', 0);
+// echo $id;
+$productData = Mage::getModel('catalog/product')->getCollection()->addFieldToFilter('category_id', "{$id}");
+echo "<pre>";
+// print_r($productData);
+
+?>
+<div class="container" style="margin-top:20px;">
+    <div class="table overflow-x-scroll">
+        <table class="table table-striped">
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Category Name</th>
+
+            </tr>
+            <?php
+            foreach ($productData->getData() as $product) {
+                ?>
+                <tr>
+                    <td>
+                        <?php print_r($product->getId()); ?>
+                    </td>
+                    <td>
+                        <?php print_r($product->getName()); ?>
+                    </td>
+                    <td>
+                        <?php print_r($product->getCategoryId()); ?>
+                    </td>
+                </tr>
+
+            <?php } ?>
+        </table>
+    </div>
+</div>

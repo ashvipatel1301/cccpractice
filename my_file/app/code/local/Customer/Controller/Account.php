@@ -67,7 +67,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
             $layout = $this->getLayout();
             //print_r($layout);
             $layout->getChild('head')->addCss(Mage::getBaseUrl() . 'skin/css/product/loginpage.css');
-            //$layout->getChild('head')->addJs(Mage::getBaseUrl() . 'ahi jquery ni cdn download karine e file skin ma js ma mukvi');
+            $layout->getChild('head')->addJs(Mage::getBaseUrl() . 'skin/js/jquery-3.7.1.min.js');
     
             $child = $layout->getChild('content');
             $loginForm = $layout->createBlock('customer/login');
@@ -80,6 +80,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
             try
             {
                 $postData = $this->getRequest()->getParams('cdata');
+                $message=[];
                 $email = $postData['customer_email'];
                 $password = $postData['password'];
                 $data = Mage::getModel("customer/customer")->getCollection()
@@ -98,20 +99,28 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
                 {
                     // echo "yay you logged in";
                     Mage::getSingleton('core/session')->set("logged_in_customer_id", $customerId);
-                    //print_r($_SESSION);
-                    $this->setRedirect('customer/account/dashboard');
+                    $message = [
+                        'type'=> 'success',
+                        'message'=>'successfull'
+                    ];
+                    // $this->setRedirect('customer/account/dashboard');
                     
                 }
                 else
                 {
-                    echo "Wrong Credentials ! ";
+                    // echo "Wrong Credentials ! ";
                     Mage::getSingleton('core/session')->remove('logged_in_customer_id');
+                    $message = [
+                        'type'=>'error',
+                        'message'=>'wrong credential'
+                    ];
                 }    
             }
             catch (Exception $e) 
             {
                 var_dump($e->getMessage());
             }
+            echo json_encode($message);
         }
     } 
 

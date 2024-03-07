@@ -1,7 +1,7 @@
 
 
-    <div class="login-container">
-        <form action="" method="post" class="login-form">
+    <div class="login-container" >
+        <form action="" method="post" class="login-form" id="login-form">
             <h2>Login</h2>
             <div class="input-group">
                 <label for="userid">User ID:</label>
@@ -11,13 +11,16 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="cdata[password]" required>
             </div>
-            <button type="submit">Login</button>
+            <!-- <button type="submit">Login</button> -->
             
-            <!-- <input type="button" onclick="loginAction(this)" value="Login" class="button"> -->
-            <a href="<?php echo $this->getUrl('customer/account/register')?>">New User,Register Here</a>
+            <button type="button" onclick="loginAction(this)" value="Login" class="">Login</button>
+            <!-- <a href="<?php //echo $this->getUrl('customer/account/register')?>">New User,Register Here</a> -->
+			<div id="message"></div>
         </form>
+		
     </div>
-    <!-- <script type="text/javascript">
+
+	<script type="text/javascript">
 	function loginAction(btn) {
 		//console.log($('#login-form'));
 		var form = $($('#login-form')[0]);
@@ -31,11 +34,19 @@
 			var output = JSON.parse(response);
 			// alert(response)
 			alert(output.type)
-			$('#message')[0].innerHTML = output.message;
-			alert(output.message)
-			$( this ).addClass( "done" );
-			$( this ).addClass( "done" );
+			if(output.type=="success"){
+				alert(output.message);
+				window.location.href="<?php echo $this->getUrl('customer/account/dashboard');?>";
+			}
+			else{
+				alert(output.message);
+			}
+			// $('#message')[0].innerHTML = output.message;
+			// alert(output.message)
+			// $( this ).addClass( "done" );
+			// $( this ).addClass( "done" );
 		});
 	}
-</script> -->
+</script> 
 
+    

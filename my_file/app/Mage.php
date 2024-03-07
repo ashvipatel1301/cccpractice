@@ -40,6 +40,11 @@ class Mage{
         return "http://localhost/String Function Practice/my_file/";
         
     }
+    //for banner image url mate
+    public static function getMediaUrl($path){
+        return "http://localhost/String Function Practice/my_file/media/";
+
+    }
     //when we use getModel() then everytime it will create a object of same class
     //istead of that we use  this so it will create a obj of that class and then we will use everytiome 
     public static function getSingleton($className)

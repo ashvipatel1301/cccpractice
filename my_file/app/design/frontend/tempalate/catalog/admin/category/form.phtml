@@ -1,0 +1,20 @@
+<?php
+    $category_model=$this->getCategory();
+?>
+<form action="<?php echo $this->getUrl("admin/catalog_category/save");?>" method="post" class="product">
+
+    <input type="hidden"  value="<?php echo $category_model->getId();?>"name="catdata[category_id]"  />
+
+    <label for="categoryName">Category Name</label>
+    <input type="text" id="categoryName" name="catdata[category_name]" value="<?php echo $category_model->getCategoryName();?>" />
+
+   <label for="status">Status</label>
+    <select name="catdata[status]" id="status">
+        <option value="1"<?php echo ($category_model->getStatus() == "E")?'selected' : '' ;?>>enable</option>
+        <option value="0"<?php echo ($category_model->getStatus() == "D")?'selected' : '' ;?>>disable</option>
+    </select>
+
+    <input type="submit" name="" value="submit" />
+</form>
+
+    

@@ -5,6 +5,8 @@ class Admin_Controller_Account extends Core_Controller_Admin_Action{
     public function loginAction(){
         if(!$this->getRequest()->isPost()){
         $layout = $this->getLayout();
+        // $headerAdmmin = $layout->getChild('head')->addCss(Mage::getBaseUrl() . 'skin/css/product/.css')
+        // $layout->getChild('head')->addCss(Mage::getBaseUrl() . 'skin/css/admin/header.css');
         $layout->getChild('head')->addCss(Mage::getBaseUrl() . 'skin/css/product/loginpage.css');//login ni j css che
         $child = $layout->getChild('content');
         $adminList =  $layout->createBlock('admin/login');

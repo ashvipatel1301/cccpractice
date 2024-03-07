@@ -12,7 +12,8 @@ class Page_Controller_Index extends Core_Controller_Front_Action {
         $layout->getChild('head')->addCss('css/page.css');
 
         $child=$layout->getChild('content');
-        $banner=$layout->createBlock('core/template')->setTemplate('banner/banner.phtml');
+        
+        $banner=$layout->createBlock('banner/banner');//->setTemplate('banner/admin/form.phtml');
         // print_r($productForm);die();
         $child->addChild('banner',$banner);
         $layout->toHtml();

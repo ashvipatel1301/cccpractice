@@ -2,29 +2,29 @@
 class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
 {
     protected $_allowAction = [];
-    public function formAction()
-    {
-       
+        public function formAction()
+        {
         
-        $layout = $this->getLayout();
+            
+            $layout = $this->getLayout();
 
-        $layout->getChild('head')->addJs('js/page.js');
-        $layout->getChild('head')->addJs('js/head.js');
-        // $layout->getChild('head')->addCss('../../app/design/frontend/tempalate/product/css/product.css');
-        $productFormCss = Mage::getBaseUrl() . 'skin/css/product/form.css';
-        $layout->getChild('head')->addCss($productFormCss);
+            $layout->getChild('head')->addJs('js/page.js');
+            $layout->getChild('head')->addJs('js/head.js');
+            // $layout->getChild('head')->addCss('../../app/design/frontend/tempalate/product/css/product.css');
+            $productFormCss = Mage::getBaseUrl() . 'skin/css/product/form.css';
+            $layout->getChild('head')->addCss($productFormCss);
 
-        $child = $layout->getChild('content');
-        // print_r($child);
-        // $productForm=$layout->createBlock('core/template')->setTemplate('product/form.phtml');
-        $productForm = $layout->createBlock('catalog/admin_product_form');//->setTemplate('product/form.phtml');
-        // print_r($productForm);die();
-        $child->addChild('form', $productForm);
-        // print_r($child);//die();
-        $layout->toHtml();
+            $child = $layout->getChild('content');
+            // print_r($child);
+            // $productForm=$layout->createBlock('core/template')->setTemplate('product/form.phtml');
+            $productForm = $layout->createBlock('catalog/admin_product_form');//->setTemplate('product/form.phtml');
+            // print_r($productForm);die();
+            $child->addChild('form', $productForm);
+            // print_r($child);//die();
+            $layout->toHtml();
 
 
-    }
+        }
     public function deleteAction()
     {
         // $id = $this->getRequest()->getParams('id',0);
@@ -52,38 +52,58 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
     
     public function saveAction()
     {
-        // echo 2323;
-    //$data = $this->getRequest()->getParams('pdata');   //getrequest aetle request no obj and aena par params method cll karai
-        // echo "<pre>";   //anathi proper line ma array ma avase
-        // print_r($data);  //return form data 
-
-        //aa data ae database ma submit karavano che soo save fun jose 
-    //$productData = Mage::getModel('catalog/product');
-        // print_r($productData);
-    //$productData->setData($data);
-        // print_r($productData->getData());  //return data
-    //$productData->save();
-        
-        // die;
-         try{
-            if(!$this->getRequest()->isPost()){
-                throw new Exception("request is not Valid");
-            }
+        try {
             echo "<pre>";
-            $data = $this->getRequest()->getParams('pdata');
+            if (!$this->getRequest()->isPost()) {
+                throw new Exception("request is not valid");
+            }
+        $data = $this->getRequest()->getParams('pdata');
+        $fileName = $_FILES['pdata']['name']['image_link'];
+        $data = array_merge($data, ["image_link" => $fileName]);
             if(!isset($data['price']) || !is_numeric($data['price']))
             {
                 throw new Exception("price must be in numeric");
             }
-            }
-        catch(Exception $e){
-            var_dump($e->getMessage());
-        }
+            
         $productModel = Mage::getModel("catalog/product");
         $productModel->setData($data)->save();
-    
-        
-    }
+        print_r($productModel);
 
+        if (isset($_FILES["pdata"]["name"])) {
+            
+            $e = $_FILES["pdata"]["error"]["image_link"];
+            $n = $fileName;
+            $t = $_FILES["pdata"]["tmp_name"]["image_link"];
+            $allowed = array('jpg', 'gif', 'png', 'PNG', 'jpeg','webp');
+            $ext = explode(".", $n);
+
+            if ($e == 0) {
+                if (!file_exists(Mage::getBaseDir('media/product/') . $n)) {
+                    if (in_array($ext[1], $allowed)) {
+                        if (move_uploaded_file($t, Mage::getBaseDir('media/product/') . $n)) {
+                            echo ("file uploaded succesfully");
+                        } else {
+                            echo "file cannot be uploaded";
+                        }
+                    } else {
+                        echo "this extension is not allowed";
+                    }
+                } else {
+                    echo "file already exist";
+
+                }
+            } else {
+                echo "error:" . $e;
+            }
+        }
+
+    } catch (Exception $e) {
+        var_dump($e->getMessage());
     }
+}
+    
+}
+    
+
+    
 ?>

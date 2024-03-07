@@ -1,0 +1,39 @@
+<?php
+$categoryList = Mage::getModel('catalog/category')->getCollection();
+
+?>
+<div class="container" style="margin-top:20px;">
+    <div class="table overflow-x-scroll">
+        <table class="table table-striped">
+            <tr>
+                <th>Category Id</th>
+                <th>Category Name</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+            <?php foreach ($categoryList->getData() as $category) { ?>
+                <tr>
+                    <td>
+                        <?php print_r($category->getId()); ?>
+                    </td>
+                    <td>
+                        <?php print_r($category->getCategoryName()); ?>
+                    </td>
+                    <td>
+                        <?php print_r($category->getStatus()); ?>
+                    </td>
+                    <td>
+                    <a href="<?php echo $this->getUrl('admin/catalog_category/form?id=') . $category->getId() ?>"
+                        class=""><button type="button" class="btn btn-outline-success">Update</button></a>
+                </td>
+                <td>
+                    <a href="<?php echo $this->getUrl('admin/catalog_category/delete?id=') . $category->getId() ?>"
+                        class=""><button type="button" class="btn btn-outline-danger">Delete</button></a>
+                </td>
+
+                </tr>
+            <?php } ?>
+        </table>
+    </div>
+</div>

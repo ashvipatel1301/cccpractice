@@ -35,7 +35,7 @@ class Core_Model_Resource_Abstract
     }
     public function save(Core_Model_Abstract $modelClass)
     {
-        echo 55;
+        // echo 55;
         $data = $modelClass->getData();
         print_r($data);
         // if (isset($data[($this->getPrimaryKey())])) 
@@ -48,9 +48,11 @@ class Core_Model_Resource_Abstract
                 [$this->getPrimaryKey() => $modelClass->getId()]
             );
             $this->getAdapter()->update($sql);
+            echo "Record is updated";
         }else{
             // echo "insert";
             $sql = $this->insertSql($this->getTableName(), $data);
+            echo "<pre>";
             $id = $this->getAdapter()->insert($sql);
             $modelClass->setId($id);
             Print_r($modelClass);

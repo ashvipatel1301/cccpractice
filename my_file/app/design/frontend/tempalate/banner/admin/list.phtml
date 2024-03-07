@@ -1,0 +1,51 @@
+<?php
+$bannerList = Mage::getModel('banner/banner')->getCollection();
+// print_r($bannerList);
+?>
+
+<div class="container" style="margin-top:20px;">
+    <div class="table overflow-x-scroll">
+        <table class="table table-striped">
+            <tr>
+                <th>Banner Id</th>
+                <th>Banner Title</th>
+                <th>Banner Image</th>
+                <th>Status</th>
+                <th>Show_On</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <?php
+            foreach ($bannerList->getData() as $banner) {
+                ?>
+                <tr>
+                <td>
+                    <?php print_r($banner->getId()); ?>
+                </td>
+                <td>
+                    <?php print_r($banner->getBannerTitle()); ?>
+                </td>
+                <td>
+                    <img src="<?php echo $this->getUrl('media/banner/') . $banner->getBannerImage(); ?>" alt="Logo"
+                        width=130>
+                </td>
+                <td>
+                    <?php print_r($banner->getStatus()); ?>
+                </td>
+                <td>
+                    <?php print_r($banner->getShowOn()); ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->getUrl('admin/banner/form?id=') . $banner->getId() ?>" class=""><button
+                            type="button" class="btn btn-outline-success">Update</button></a>
+                </td>
+                <td>
+                    <a href="<?php echo $this->getUrl('admin/banner/delete?id=') . $banner->getId() ?>" class=""><button
+                            type="button" class="btn btn-outline-danger">Delete</button></a>
+                </td>
+            </tr>
+
+            <?php } ?>
+        </table>
+    </div>
+</div>

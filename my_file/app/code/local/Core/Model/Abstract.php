@@ -56,6 +56,12 @@ class Core_Model_Abstract{
         // print_r($this);
         return $this;
     }
+    protected function _beforeSave(){
+        return $this;
+    }
+    protected function _afterSave(){
+        return $this;
+    }
     public function load($id,$column=null){
         // echo 123;
         // echo get_class($this->getResource());//Product_Model_Resource_Product  
@@ -68,4 +74,10 @@ class Core_Model_Abstract{
         return $this;
 
     }
+    public function addData($key, $value)
+    {
+        $this->_data[$key] = $value;
+        return $this;
+    }
+
 }

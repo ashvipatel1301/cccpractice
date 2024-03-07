@@ -11,8 +11,8 @@ $productList = Mage::getModel('catalog/product')->getCollection();
     // echo get_class($this);
 ?>
 <div class="container" style="margin-top:20px;">
-    <div class="table"> 
-        <table class="table table-striped overflow-x-auto">
+    <div class="table overflow-x-scroll"> 
+        <table class="table table-striped">
             <tr>
                 <th>Product Id</th>
                 <th>SKU</th>
@@ -22,7 +22,7 @@ $productList = Mage::getModel('catalog/product')->getCollection();
                 <th>Description</th>
                 <th>Image-Link</th>
                 <th>Link</th>
-                <th>Category Id</th>
+                <th>Category Name</th>
                 <th>Price</th>
                 <th>mfr_cost</th>
                 <th>Shipping Cost</th>

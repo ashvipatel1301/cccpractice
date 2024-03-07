@@ -1,0 +1,16 @@
+<?php
+// $chatting_Model = $this->getChattingData();
+?>
+
+<form action="<?php echo $this->getUrl("chatting/account/add");?>" method="post" class="product"> 
+
+   <input type="hidden"  value="<?php //echo $chatting_model->getId();?>"name="cdata[id]"  />  
+
+   <label for="first_name">User Name</label>
+    <input type="text" id="first_name" name="cdata[from_user]" value="<?php //echo $chatting_model->getFromUser();?>" />
+
+    <label for="last_name">Message</label>
+    <input type="text" id="last_name" name="cdata[message]" value="<?php //echo $chatting_model->getmessage();?>" />
+
+    <input type="submit" name="" value="submit" />
+ </form> 
