@@ -10,30 +10,23 @@ class Chatting_Controller_Account extends Core_Controller_Front_Action{
             $layout->toHtml();
         
     }
-    public function addAction(){
-        $data = $this->getRequest()->getParams();
-        echo "<pre>";
-        print_r($data);
-        Mage::getModel('chatting/chatting')->addData($data);
-
-    }
+   
     public function saveAction(){
+        echo "sdf";
         $data = $this->getRequest()->getParams('cdata');
+        
         echo "<pre>";
         print_r($data);
-        $chattingData =Mage::getModel('chatting/chatting');
-        // $sessionId = Mage::getSingleton('core/session')->get('id');
-        // $session = (!$sessionId) ? 0 :$sessionId;
-        // $this->load($sessionId);
-        // if(!$this->$getId){
-
-        // }
+        // $data = array_merge($data,['to_user'=>NULL]);
+       $chattingData =Mage::getModel('chatting/chatting')->setData($data)->save();
+      
+        // Mage::getModel('core/session')->set('to_user',$data['from_user']);
         
-        $chattingData->setData($data);
-        print_r($chattingData->getData());
+        print_r($chattingData);
         // $chattingData->save();
     }
     public function listAction(){
+        // echo "list action called";
         $layout = $this->getLayout();
         $child = $layout->getChild('content');
         $listForm = $layout->createBlock('chatting/list');

@@ -1,0 +1,67 @@
+<?php
+
+$quote=$this-> getQuoteModel();
+$cartProducts=$this->getCartProducts()->getData();
+//print_r($quote);die; 
+// $cartProducts->getData();
+// print_r($cartProducts);die;
+?>
+<div class="container mt-5">
+    <h2 class="mb-4"><i class="fa-solid fa-cart-shopping"></i> My Cart</h2>
+    <?php if(count($cartProducts)):?>
+    <div class="row">
+      <?php foreach($cartProducts as $_item):?>
+        
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="row g-0"> 
+            <div class="col-md-4">
+              <img src="<?php echo Mage::getBaseUrl().'media/product/'.$_item->getProduct()->getImageLink();?>" class="card-img" alt="Product Image" height="150" width="150">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><?php echo $_item->getProduct()->getName();?></h5>
+                <p class="card-text">
+                    <p><strong>Color: </strong><?php echo $_item->getProduct()->getColor()?></p>
+                    <p><strong>Description: </strong><?php echo $_item->getProduct()->getDescription()?></p>
+                    <p><strong>Price: </strong><?php echo '₹',$_item->getProduct()->getPrice()?></p>
+                </p>
+                <div class="input-group mb-3">
+                  <?php 
+                  $quantity=$_item->getQty();
+                  ?>
+                  <form method='post' action='<?php echo $this->getUrl('sales/quote/edit')?>'>
+                    <input type='hidden' name='qdata[product_id]' value='<?php echo $_item->getProduct()->getId()?>'>
+                   <select class="form-select" id="inputGroupSelect01" name="qdata[qty]">
+                    <option value="">--select Quantity--</option>
+                    <?php for($i=1;$i<=10;$i++):?>
+                       <option value=<?php echo $i?> <?php echo ($quantity == $i)? 'selected' : '';?>><?php echo $i;?></option>
+                    <?php endfor?>   
+                    </select>
+                  <input type='submit' value='Update Quantity' class="btn btn-success" style='margin-top:10px;'>
+                  <button class="btn btn-danger" type="button" style='margin-top:10px;'><a href='<?php echo $this->getUrl('sales/quote/remove').'?id='.$_item->getId();?>' style='color:white;text-decoration:none'>Remove Item</a></button>
+                    </form> 
+                </div>
+                
+                <p class="card-text"><?php echo'Total price:'.'₹',$_item->getRowTotal()?></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php endforeach?>
+      <!-- product ends -->
+      <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="grand-total-section text-center">
+          <p><strong>Tax:</strong> ₹0.00</p>
+          <p><strong>Grand Total:</strong><?php echo '₹'.$quote->getGrandTotal();?></p>
+          <button class="btn btn-primary mb-3" style='width:50%'><a href='<?php echo $this->getUrl('sales/quote/checkout')?>' style='color:white;text-decoration:none'>checkout</a></button>
+        </div>
+      </div>
+    </div>
+  <?php  else:?>
+    empty
+    <?php  endif;?>
+
+</div>

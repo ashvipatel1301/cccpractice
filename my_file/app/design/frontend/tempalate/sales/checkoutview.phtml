@@ -1,0 +1,220 @@
+<?php
+$customerData = $this->getCustomer();
+// print_r($customerData);die;
+
+?>
+
+<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+<style>
+    .address-section {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .submit-btn {
+        margin-top: 20px;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Left-hand side: Customer Addresses -->
+            <h2>Customer Information</h2>
+            <?php foreach ($customerData->getData() as $customer): ?>
+                <div class="address-section address-cards"
+                    data-json='{"billing_address":"<?php echo $customer->getBillingAddress(); ?>","billing_city":"<?php echo $customer->getBillingCity(); ?>","billing_country":"<?php echo $customer->getBillingCountry(); ?>","billing_phone":"<?php echo $customer->getBillingPhone(); ?>","billing_zipcode":"<?php echo $customer->getBillingZipcode(); ?>"}'>
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Address</h5>
+                            <p class="card-text"><strong>Billing Address:</strong>
+                                <?php echo $customer->getBillingAddress(); ?>
+                            </p>
+                            <p class="card-text"><strong>Billing City:</strong>
+                                <?php echo $customer->getBillingCity(); ?>
+                            </p>
+                            <p class="card-text"><strong>Billing Region:</strong>
+                                <?php echo $customer->getBillingRegion(); ?>
+                            </p>
+                            <p class="card-text"><strong>Billing Country:</strong>
+                                <?php echo $customer->getBillingCountry(); ?>
+                            </p>
+                            <p class="card-text"><strong>Billing Phone:</strong>
+                                <?php echo $customer->getBillingPhone(); ?>
+                            </p>
+                            <p class="card-text"><strong>Billing ZIP:</strong>
+                                <?php echo $customer->getBillingZipcode(); ?>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <script type="text/javascript">
+            $('.address-cards').each((i, e) => {
+                console.log($(e).attr('data-json'))
+                $(e).click(() => {
+                    var _data = JSON.parse($(e).attr('data-json'))
+                    for (var key in _data) {
+                        if (_data.hasOwnProperty(key)) {
+                            $('#' + key).val(_data[key]);
+                        }
+                    }
+
+                });
+            })
+        </script>
+
+        <div class="col-md-6">
+            <!-- Right-hand side: Billing and Shipping Addresses -->
+            <div class="address-section">
+                <h2 class="form-title">Billing Information</h2>
+                <form action="<?php echo $this->getUrl('sales/quote/save'); ?>" method="post" class="sales-quote-form">
+                    <div class="form-group">
+                        <label for="billing-address">Address:</label>
+                        <input type="text" class="form-control" id="billing_address" name="bdata[billing_address]"
+                            placeholder="Enter billing address">
+                    </div>
+                    <div class="form-group">
+                        <label for="billing-city">City:</label>
+                        <input type="text" class="form-control" id="billing_city" name="bdata[billing_city]"
+                            placeholder="Enter billing city">
+                    </div>
+                    <div class="form-group">
+                        <label for="billing-region">Region:</label>
+                        <input type="text" class="form-control" id="billing_region" name="bdata[billing_region"
+                            placeholder="Enter billing region">
+                    </div>
+                    <div class="form-group">
+                        <label for="billing-country">Country:</label>
+                        <input type="text" class="form-control" id="billing_country" name="bdata[billing_country]"
+                            placeholder="Enter billing country">
+                    </div>
+                    <div class="form-group">
+                        <label for="billing-phone">Phone:</label>
+                        <input type="tel" class="form-control" id="billing_phone" name="bdata[billing_phone]"
+                            placeholder="Enter billing phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="billing-zipcode">Billing ZIP:</label>
+                        <input type="text" class="form-control" id="billing_zipcode" name="bdata[billing_zipcode]"
+                            placeholder="Enter billing zipcode">
+                    </div>
+                    <h2 class="form-title">Shipping Information</h2>
+                    <div class="form-group">
+                        <input type="checkbox" id="same_as_billing" onchange="copyBillingToShipping()"
+                            class="checkbox-same-as-billing">
+                        <label for="same_as_billing" class="label-same-as-billing">Same as Billing</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-address">Address:</label>
+                        <input type="text" class="form-control" id="shipping_address" name="bdata[shipping_address]"
+                            placeholder="Enter shipping address">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-city">City:</label>
+                        <input type="text" class="form-control" id="shipping_city" name="bdata[shipping_city]"
+                            placeholder="Enter shipping city">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-region">Region:</label>
+                        <input type="text" class="form-control" id="shipping_region" name="bdata[shipping_region]"
+                            placeholder="Enter shipping region">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-country">Country:</label>
+                        <input type="text" class="form-control" id="shipping_country" name="bdata[shipping_country]"
+                            placeholder="Enter shipping country">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-phone">Phone:</label>
+                        <input type="tel" class="form-control" id="shipping_phone" name="bdata[shipping_phone]"
+                            placeholder="Enter shipping phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="shipping-zipcode">Shipping ZIP:</label>
+                        <input type="text" class="form-control" id="shipping_zipcode" name="bdata[shipping_zipcode]"
+                            placeholder="Enter shipping zipcode">
+                    </div>
+
+                    <!-- <button type="submit" class="btn btn-primary submit-btn">Submit</button> -->
+                    <!-- </form> -->
+            </div>
+            <div class="col-md-6">
+                <div class="address-section">
+                    <h2 class="form-title">Shipping Methods</h2>
+
+                    <div class="form-group">
+                        <label for="shipping-method">Select Shipping Method:</label>
+                        <select id="shipping-method" name=smdata[shipping_method] class="form-control">
+                            <option value="standard">-- Select here --</option>
+                            <option value="standard">Standard Shipping</option>
+                            <option value="express">Express Shipping</option>
+                            <option value="priority">Priority Shipping</option>
+                        </select>
+                    </div>
+                    <!-- <button type="submit" class="btn btn-primary submit-btn">Submit</button> -->
+                    <!-- </form> -->
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="address-section">
+                    <h2 class="form-title">Payment Methods</h2>
+
+                    <div class="form-group">
+                        <label for="shipping-method">Select Payment Method:</label>
+                        <select id="shipping-method" name=pmdata[payment_method] class="form-control">
+                            <option value="standard">-- Select here --</option>
+                            <option value="COD">Cash on Delivery (COD)</option>
+                            <option value="Credit Card">Credit Card</option>
+                            <option value="UPI">UPI</option>
+                        </select>
+                    </div>
+
+                    <!-- </form> -->
+                </div>
+                <button type="submit" class="btn btn-primary submit-btn">Place Order</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- this for checkbox which will fill automatic above details -->
+<script>
+    function copyBillingToShipping() {
+        if (document.getElementById('same_as_billing').checked) {
+            document.getElementById('shipping_address').value = document.getElementById('billing_address').value;
+            document.getElementById('shipping_city').value = document.getElementById('billing_city').value;
+            document.getElementById('shipping_region').value = document.getElementById('billing_region').value;
+            document.getElementById('shipping_country').value = document.getElementById('billing_country').value;
+            document.getElementById('shipping_phone').value = document.getElementById('billing_phone').value;
+            document.getElementById('shipping_zipcode').value = document.getElementById('billing_zipcode').value;
+        } else {
+
+            document.getElementById('shipping_address').value = '';
+            document.getElementById('shipping_city').value = '';
+            document.getElementById('shipping_region').value = '';
+            document.getElementById('shipping_country').value = '';
+            document.getElementById('shipping_phone').value = '';
+            document.getElementById('shipping_zipcode').value = '';
+        }
+    }
+</script>

@@ -8,15 +8,12 @@ class Catalog_Model_Product extends Core_Model_Abstract{
     }   
     protected function _beforeSave()
     {
-        // echo "In beforeload";
-        if(!isset($this->_data['created_at']))
+        if(!isset($this->_data['created_at']) || $this->_data['created_at']== "")
         {
-            if($this->_data['created_at'] == NULL)
-            {
-                $this->_data['created_at']='2016-12-12';
-            }
+            $this->_data['created_at'] = '2015-01-01';
         }
-        $this->_data['upadted_at']='2016-12-10';
+        $this->_data['updated_at'] = date('Y-m-d H:i:s');
+        return $this;
     }
     public function getStatus() {
         $mapping = [1=>'E',0=>'D'];

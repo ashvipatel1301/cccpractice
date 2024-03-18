@@ -1,16 +1,31 @@
 <?php
 // $chatting_Model = $this->getChattingData();
+
+$chatModel = Mage::getModel('chatting/chatting');
+$lastUser = $chatModel->getLastUser();
+
+// if ($lastUser) {
+    $last = $lastUser->getFromUser();
+    $lastToUser = $lastUser->getToUser();
+// } else {
+//     $last = $lastToUser = '';
+// }
 ?>
 
-<form action="<?php echo $this->getUrl("chatting/account/add");?>" method="post" class="product"> 
+<form action="<?php echo $this->getUrl("chatting/account/save");?>" method="post" class="product"> 
 
    <input type="hidden"  value="<?php //echo $chatting_model->getId();?>"name="cdata[id]"  />  
 
-   <label for="first_name">User Name</label>
-    <input type="text" id="first_name" name="cdata[from_user]" value="<?php //echo $chatting_model->getFromUser();?>" />
-
+   <label for="from_user">User Name</label>
+   <input type="text" id="from_user" name="cdata[from_user]" value="<?php echo $lastToUser?>">
+    
+   <label for="to_user">User Name</label>
+    
+   <input type="hidden" id="to_user" name="cdata[to_user]" value="<?php echo $last ?>">
+    
     <label for="last_name">Message</label>
     <input type="text" id="last_name" name="cdata[message]" value="<?php //echo $chatting_model->getmessage();?>" />
-
+    
+   
     <input type="submit" name="" value="submit" />
  </form> 

@@ -9,6 +9,7 @@ class Core_Model_Abstract{
     public function __construct(){
         $this->init();  //this will call the Product_Model_Product init method as $this call child's method  
     }
+    
     public function getResource(){
         return new $this->resourceClass;
     }
@@ -52,7 +53,9 @@ class Core_Model_Abstract{
     public function save(){
         // echo 233;
         // print_r($this->getData());
+        $this->_beforeSave();
         $this->getResource()->save($this);
+        $this->_afterSave();
         // print_r($this);
         return $this;
     }
@@ -78,6 +81,11 @@ class Core_Model_Abstract{
     {
         $this->_data[$key] = $value;
         return $this;
+    }
+    public function removeData($key){
+        unset($this->_data[$key]);
+        return $this;
+
     }
 
 }

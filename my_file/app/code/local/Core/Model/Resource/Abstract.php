@@ -53,9 +53,10 @@ class Core_Model_Resource_Abstract
             // echo "insert";
             $sql = $this->insertSql($this->getTableName(), $data);
             echo "<pre>";
+            // echo $sql;die;
             $id = $this->getAdapter()->insert($sql);
             $modelClass->setId($id);
-            Print_r($modelClass);
+            // Print_r($modelClass);
         }
         
 

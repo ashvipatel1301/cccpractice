@@ -57,7 +57,9 @@ $productList = Mage::getModel('catalog/product')->getCollection();
                     <?php print_r($product->getDescription()); ?>
                 </td>
                 <td>
-                    <?php print_r($product->getImageLink()); ?>
+                <img src="<?php echo $this->getUrl('media/product/') . $product->getImageLink(); ?>" alt="Logo"
+                        width=130>
+                    <!-- <?php //print_r($product->getImageLink()); ?> -->
                 </td>
                 <td>
                     <?php print_r($product->getLink()); ?>

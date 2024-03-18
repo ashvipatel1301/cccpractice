@@ -78,7 +78,12 @@ class Core_Model_Resource_Collection_Abstract
                 $whereCond[] = "`$_field` > '{$_v}' ";
                 break;
               case 'in':
-                $whereCond[] = "`$_field` IN ( '{$_v}') ";
+                $v = [];
+                foreach ($_v as $val) {
+                  $v[] = "'" . addslashes($val) . "'";
+                }
+                $_v = implode(',', $v);
+                $whereCond[] = "`$_field` IN ({$_v})";
                 break;
               case 'eq':
                 $whereCond[] = "`$_field` = '{$_v}' ";
@@ -108,7 +113,7 @@ class Core_Model_Resource_Collection_Abstract
       $sql .= "LIMIT {$this->_select['limit']} ";
     }
 
-
+    // echo $sql;
     $result = $this->_resource->getAdapter()->fetchAll($sql);
 
     foreach ($result as $row) {
@@ -119,11 +124,12 @@ class Core_Model_Resource_Collection_Abstract
     $this->_isLoaded = true;
     return $this;
   }
-  public function getFirstItem(){
+  public function getFirstItem()
+  {
     if (!$this->_isLoaded) {
-        $this->load();
+      $this->load();
     }
     return $this->_data[0];
-}
+  }
 
 }
