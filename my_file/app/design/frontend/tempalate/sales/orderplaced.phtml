@@ -68,6 +68,6 @@ $orderData = $this->getOrderDetails();
             <p>Order Number:<?php echo $orderData->getOrderNumber(); ?></p>
         </div>
 
-        <a href="home.html" class="order-confirmation-button">Back to Home</a>
+        <a href="<?php echo $this->getUrl('page/index/index')?>" class="order-confirmation-button">Back to Home</a>
     </div>
 

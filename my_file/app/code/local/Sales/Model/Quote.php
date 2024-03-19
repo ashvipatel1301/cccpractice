@@ -5,7 +5,7 @@ class Sales_Model_Quote extends Core_Model_Abstract
     {
         $this->_modelClass = "sales/quote";
         $this->resourceClass = "Sales_Model_Resource_Quote";
-        $this->cllectionClass = "Sales_Model_Resource_Collection_Quote";
+        $this->collectionClass = "Sales_Model_Resource_Collection_Quote";
     }
     public function _beforeSave()
     {
@@ -35,7 +35,9 @@ class Sales_Model_Quote extends Core_Model_Abstract
             $this->load($quote->getId());
         }
 
-    }
+}
+
+
     public function addProduct($product)
     {
 
@@ -56,40 +58,59 @@ class Sales_Model_Quote extends Core_Model_Abstract
     {
 
         $this->initQuote();
-        $customerAddress=Mage::getModel('sales/quote_customer');
-        $quoteCustomer=$customerAddress->getCollection()->addFieldToFilter('quote_id',$this->getId())->getFirstItem();
-        $quoteCustomerId=($quoteCustomer && $quoteCustomer->getId()) ? $quoteCustomer->getId() :0;
+        $customerAddress = Mage::getModel('sales/quote_customer');
+        $quoteCustomer = $customerAddress->getCollection()->addFieldToFilter('quote_id', $this->getId())->getFirstItem();
+        $quoteCustomerId = ($quoteCustomer && $quoteCustomer->getId()) ? $quoteCustomer->getId() : 0;
         //print_r($itemId);
-        $customerId=Mage::getSingleton('core/session')->get('logged_in_customer_id');
-        $customerModel=Mage::getModel('customer/customer')->load($customerId);
-        $customerEmail=$customerModel->getCustomerEmail();
-        
+        $customerId = Mage::getSingleton('core/session')->get('logged_in_customer_id');
+        $customerModel = Mage::getModel('customer/customer')->load($customerId);
+        $customerEmail = $customerModel->getCustomerEmail();
+
         $customerAddress->setData($data)
-                         ->addData('quote_customer_id',$quoteCustomerId)            
-                          ->addData('quote_id',$this->getId())            
-                          ->addData('customer_id',$customerId)            
-                           ->addData('email',$customerEmail);
+            ->addData('quote_customer_id', $quoteCustomerId)
+            ->addData('quote_id', $this->getId())
+            ->addData('customer_id', $customerId)
+            ->addData('email', $customerEmail);
         $customerAddress->save();
-        //print_r($customerAddress);               
+        //print_r($customerAddress);     
+        $this->addData('customer_id', $customerId)->save();
     }
     public function addShipping($data)
     {
-        $this->initQuote();
-        $data = Mage::getModel('sales/quote_shippingmethod')->setData($data)->addData('quote_id', $this->getId())->save();
 
-        $this->addData('shipping_id', $data->getId())->save();
+        $this->initQuote();
+        $shippingModel = Mage::getModel('sales/quote_shippingmethod');
+        if ($this->getId()) {
+            $shippingData = $shippingModel->getCollection()->addFieldToFilter('quote_id', $this->getId())->getFirstItem();
+            $shippingId = ($shippingData && $shippingData->getId()) ? $shippingData->getId() : 0;
+
+            $shippingModel
+                ->setData($data)
+                ->addData('quote_id', $this->getId())
+                ->addData('shipping_id', $shippingId)
+                ->save();
+
+            $this->addData('shipping_id', $shippingId)->save();
+        }
 
     }
     public function addPayment($data)
     {
         $this->initQuote();
-        $data = Mage::getModel('sales/quote_paymentmethod')
-        ->setData($data)
-        ->addData('quote_id', $this->getId())
-        ->save();
+        $paymentModel = Mage::getModel('sales/quote_paymentmethod');
+        if ($this->getId()) {
+            $paymentData = $paymentModel->getCollection()->addFieldToFilter('quote_id', $this->getId())->getFirstItem();
+            $paymentId = ($paymentData && $paymentData->getId()) ? $paymentData->getId() : 0;
 
-        $this->addData('payment_id', $data->getId())->save();
 
+            $paymentModel
+                ->setData($data)
+                ->addData('quote_id', $this->getId())
+                ->addData('payment_id', $paymentId)
+                ->save();
+
+            $this->addData('payment_id', $paymentId)->save();
+        }
     }
 
     public function convert()
@@ -103,12 +124,22 @@ class Sales_Model_Quote extends Core_Model_Abstract
                 ->removeData('quote_id')
                 ->removeData('order_id')
                 ->removeData('payment_id')
-                ->removeData('shipping_id');
-                
-            // print_r($order);
-           
-            foreach ($this->getItemCollection()->getData() as $_item) {
+                ->removeData('shipping_id')
+                ->removeData('customer_id');
 
+            // print_r($order);
+
+            
+            $shipdata = $this->convertShipping();
+            $paydata = $this->convertPayment();
+
+            $order->addData('shipping_id', $shipdata->getId())
+                ->addData('payment_id', $paydata->getId())
+                ->save();
+            $this->addData('order_id', $order->getId())->save();  //sales quote orderid
+            $this->convertCustomer($order->getId());   // quote to order customer addres 
+            foreach ($this->getItemCollection()->getData() as $_item) {
+                // print_r($_item);die;
                 $product = $_item->getProduct();
                 Mage::getModel('sales/order_item')->setData($_item->getData())
                     ->addData('order_id', $order->getId())
@@ -120,14 +151,6 @@ class Sales_Model_Quote extends Core_Model_Abstract
 
 
             }
-            $shipdata = $this->convertShipping();
-            $paydata = $this->convertPayment();
-
-            $order->addData('shipping_id',$shipdata->getId())
-                    ->addData('payment_id',$paydata->getId())
-                    ->save();
-                $this->addData('order_id',$order->getId())->save();  //sales quote orderid
-            $this->convertCustomer($order->getId());   // quote to order customer addres 
 
 
 
@@ -156,7 +179,7 @@ class Sales_Model_Quote extends Core_Model_Abstract
         $paymentData = Mage::getModel('sales/order_paymentmethod')->setData($data->getData())
             ->removeData('payment_id')
             ->save();
-            return $paymentData;
+        return $paymentData;
 
     }
     public function convertCustomer($orderId)

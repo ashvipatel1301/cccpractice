@@ -1,0 +1,41 @@
+<?php
+$orderData = $this->getCustomerOrde(); //order_id,order number      //sales/order
+$ItemData = $this->getOrderItem();  //productid,qty                    //sales_order_item                 //catalog/product
+$productData = $this->getProductItem(); //customerId                //catalog_product  //sales/order_customer
+
+// $itemData = $this->getOrderItem();  //product id,name ,qty
+
+
+// print_r($orderData);die;
+?>
+<div class="container" style="margin-top:20px;">
+    <div class="table overflow-x-scroll"> 
+        <table class="table table-striped">
+            <tr>
+                
+                <th>Order ID</th>
+                <th>Total Qty</th>
+                <th>Order Number </th>
+                <th>Grand Total</th>
+                <th>Status</th>
+                <th>Action</th>
+                
+            </tr>
+            <?php
+            foreach($orderData as $Order){?>
+              
+            
+            <tr>
+                <td>
+                    <?php print_r($Order->getId());?>
+                </td>
+                <td>
+                    <?php print_r($Order->getOrderNumber());?>
+                </td>
+                
+            </tr>  
+            <?php }  ?>
+           
+        </table>
+    </div>
+</div>
