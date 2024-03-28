@@ -1,0 +1,39 @@
+<pre>
+<?php
+$productCollection = Mage::getModel("catalog/product")->getCollection();
+
+
+?>
+</pre>
+
+<div class="container mt-5">
+    <div class="row">
+
+        <!-- Product starts here -->
+        <?php foreach ($productCollection->getData() as $product): ?>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="<?php echo Mage::getBaseUrl() . 'media/product/' . $product->getImageLink(); ?>"
+                        class="card-img-top" alt="Product Image" height="350"
+                        style='border:1px solid grey;object-fit:contain'>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <?php echo $product->getName() ?>
+                        </h5>
+                        <p class="card-text">
+                            <?php echo '₹' . $product->getPrice() ?>
+                        </p>
+                        <!-- <button class="edit-button p-2"><a href='<?php //echo $this->getUrl('catalog/product/view') ?>?id=<?php echo $product->getProductId() ?>'>View Details </a></button> -->
+                        <button class="edit-button p-2"
+                            style="background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; border: none; transition-duration: 0.4s;">
+                            <a href="<?php echo $this->getUrl('catalog/product/view') ?>?id=<?php echo $product->getProductId() ?>"
+                                style="color: white; text-decoration: none;">View Details</a>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        <?php endforeach ?>
+        <!-- Product ends here -->
+    </div>
+</div>

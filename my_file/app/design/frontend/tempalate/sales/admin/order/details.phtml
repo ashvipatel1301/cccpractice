@@ -1,0 +1,115 @@
+<?php
+$orderItems=$this->getOrderItems()->getData();
+
+$customerDetails=$this->getCustomerDetails();
+
+$addresses=$this->getAddresses();
+$shippingMethod=$this->getShipping();
+$paymentMethod=$this->getPayment();
+$statusHistory=$this->getStatusHistory()->getData();
+?>
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-7 order-details-col ">
+        <div class="details-section ">
+          <h2>Order Details</h2>
+          <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Row Total</th>
+                <th>Product Color</th>
+            </tr>
+            </thead>
+            <tbody>
+              <!-- Loop through order items -->
+              <?php foreach($orderItems as $item):?>
+              <tr>
+                <td><?php echo $item->getProductId();?></td>
+                <td><?php echo $item->getProductName();?></td>
+                <td><?php echo '₹'.$item->getPrice();?></td>
+                <td><?php echo $item->getQty();?></td>
+                <td><?php echo '₹'.$item->getRowTotal();?></td>
+                <td><?php echo $item->getProductColor();?></td>
+                
+              </tr>
+              <?php endforeach; ?>
+              
+              <!-- End loop -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="details-section">
+          <h2>Status History</h2>
+            <?php if(count($statusHistory)):?>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>From Status</th>
+                <th>To Status</th>
+                <th>Date</th>
+                <th>Action By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Status history rows -->
+              <?php foreach($statusHistory as $sh):?>
+              <tr>
+                <td><?php echo $sh->getFromStatus();?></td>
+                <td><?php echo $sh->getToStatus();?></td>
+                <td><?php echo $sh->getDate();?></td>
+                <td><?php echo $sh->getActionBy();?></td>
+              </tr>
+              <?php endforeach?>
+              <!-- End status history rows -->
+            </tbody>
+          </table>
+            <?php else:?>
+               <h1 class='text-danger'> No History yet!</h1>
+            <?php endif;?>   
+        </div>
+      </div>
+
+      <div class="col-md-5 order-details-col">
+        <div class="details-section">
+          <h2>Customer Details</h2>
+          <p><strong>Customer ID:</strong> <?php echo $customerDetails->getId();?></p>
+          <p><strong>Email:</strong> <?php echo $customerDetails->getCustomerEmail();?></p>
+          <p><strong>First Name:</strong> <?php echo $customerDetails->getFirstName();?></p>
+          <p><strong>Last Name:</strong> <?php echo $customerDetails->getLastName();?></p>
+        </div>
+
+        <div class="details-section">
+          <h2>Billing Details</h2>
+          <p><strong>Address:</strong> <?php echo $addresses->getBillingAddress();?></p>
+          <p><strong>City:</strong> <?php echo $addresses->getBillingCity();?></p>
+          <p><strong>Region:</strong> <?php echo $addresses->getBillingRegion();?></p>
+          <p><strong>Country:</strong> <?php echo $addresses->getBillingCountry();?></p>
+          <p><strong>Phone:</strong> <?php echo $addresses->getBillingPhone();?></p>
+          <p><strong>Postal Code:</strong> <?php echo $addresses->getBillingPostalcode();?></p>
+        </div>
+
+        <div class="details-section">
+          <h2>Shipping Details</h2>
+          <p><strong>Address:</strong> <?php echo $addresses->getShippingAddress();?></p>
+          <p><strong>City:</strong> <?php echo $addresses->getShippingCity();?></p>
+          <p><strong>Region:</strong> <?php echo $addresses->getShippingRegion();?></p>
+          <p><strong>Country:</strong> <?php echo $addresses->getShippingCountry();?></p>
+          <p><strong>Phone:</strong> <?php echo $addresses->getShippingPhone();?></p>
+          <p><strong>Postal Code:</strong> <?php echo $addresses->getShippingPostalcode();?></p>
+          <p><strong>Shipping Method:</strong><?php echo $shippingMethod->getShippingMethod();?></p>
+        </div>
+        <div class="details-section">
+          <h2>Payment Details</h2>
+          <p><strong>Payment Method:</strong> <?php echo $paymentMethod->getPaymentMethod();?></p>
+          <?php if($paymentMethod->getPaymentMethod() == 'Credit Card'):?>
+            <p><strong>Card Number:</strong> <?php echo $paymentMethod->getCardNumber();?></p>    
+          <?php endif;?>
+        </div>
+      </div>
+    </div>
+  </div> 

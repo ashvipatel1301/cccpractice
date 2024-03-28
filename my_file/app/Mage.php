@@ -42,7 +42,7 @@ class Mage{
     }
     //for banner image url mate
     public static function getMediaUrl($path){
-        return "http://localhost/String Function Practice/my_file/media/";
+        return "http://localhost/String Function Practice/my_file/media/" . $path;
 
     }
     //when we use getModel() then everytime it will create a object of same class

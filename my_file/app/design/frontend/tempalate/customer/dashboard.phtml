@@ -1,63 +1,66 @@
-
 <?php
-
-$customerModel =$this->getCustomerData();
-// print_r($customerModel);
-//->addFieldToFilter('color','silver');
+$customerModel=$this->getCustomerData();
+//print_r($customerModel);
 ?>
-
-<div class="container" style="margin-top:20px;">
-    <div class="table overflow-x-scroll"> 
-        <table class="table table-striped">
-     <tr>
-         <th>Customer_ID</th>
-         <th>Customer_Email</th>
-         <th>Last Name</th>
-         <th>Billing_Address</th>
-         <th>Billing_City</th>
-         <th>Billing_Country</th>
-         <th>Billing_Phone</th>
-         <th>Shipping_Address</th>
-         <th>Shipping_City</th>
-         <th>Shipping_Region</th>
-         <th>Shipping_Country</th>
-         <th>Shipping_Phone</th>
-         <th>default</th>
-         <th>password</th>
-         <th>Update</th>
-        <th>Delete</th>
-     </tr>
-     <tr>
-        <td>
-            <?php echo $customerModel->getCustomerId();?>
-        </td>
-        <td><?php echo $customerModel->getCustomerEmail();?></td>
-        <td><?php echo $customerModel->getLastName();?></td>
-        <td><?php echo $customerModel->getBillingAddress();?></td>
-        <td><?php echo $customerModel->getBillingCity();?></td>
-        <td><?php echo $customerModel->getBillingCountry();?></td>
-        <td><?php echo $customerModel->getBillingPhone();?></td>
-        <td><?php echo $customerModel->getShippingAddress();?></td>
-        <td><?php echo $customerModel->getShippingCity();?></td>
-        <td><?php echo $customerModel->getShippingRegion();?></td>
-        <td><?php echo $customerModel->getShippingCountry();?></td>
-        <td><?php echo $customerModel->getShippingPhone();?></td>
-        <td><?php echo $customerModel->getDefault();?></td>
-        <td><?php echo $customerModel->getPassword();?></td>
-        <td>
-                    <a href="<?php echo $this->getUrl('customer/account/register?id=') . $customerModel->getCustomerId() ?>"
-                        class=""><button type="button" class="btn btn-outline-success">Update</button></a>
-        </td>
-                <td>
-                    <a href="<?php echo $this->getUrl('customer/account/delete?id=') . $customerModel->getCustomerId() ?>"
+<div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-3 col-lg-2 d-md-block sidebar bg-dark">
+        <div class="sidebar-sticky">
+          <h2 class="sidebar-heading">Dashboard</h2>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href=""> <i class="fa-solid fa-user" style="color: #f0f2f5;"></i> My Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $this->getUrl('sales/quote/view');?>"> <i class="fa-solid fa-cart-shopping" style="color: #f8f9fc;"></i> My Cart</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $this->getUrl('sales/order/list');?>"> <i class="fa-solid fa-bag-shopping" style="color: #f8f9fc;"></i> My Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $this->getUrl('customer/account/logout');?>"> <i class="fa-solid fa-right-from-bracket" style="color: #f8f9fc;"></i> Logout</a>
+            </li>
+            
+          </ul>
+        </div>
+      </nav>
+      
+      <!-- Customer Details -->
+      <div class="col-md-9  col-lg-10 px-md-4">
+        <div class="customer-details">
+          <h2>My Details</h2>
+          <div class="customer-info">
+            <h4>Profile Information</h4>
+            <p><strong>Email: </strong><?php echo $customerModel->getCustomerEmail();?></p>
+            <p><strong>Password: </strong><?php echo $customerModel->getCustomerPassword();?></p>
+            <p><strong>First Name: </strong><?php echo $customerModel->getFirstName();?></p>
+            <p><strong>Last Name: </strong><?php echo $customerModel->getLastName();?></p>
+          </div>
+          <div class="customer-info mt-3">
+            <h4>Billing Address</h4>
+            <p><strong>Address: </strong><?php echo $customerModel->getBillingAddress();?></p>
+            <p><strong>City: </strong><?php echo $customerModel->getBillingCity();?></p>
+            <p><strong>Region: </strong> <?php echo $customerModel->getBillingRegion();?></p>
+            <p><strong>Country: </strong><?php echo $customerModel->getBillingCountry();?></p>
+            <p><strong>Phone: </strong><?php echo $customerModel->getBillingPhone();?></p>
+          </div>
+          <div class="customer-info mt-3">
+            <h4>Shipping Address</h4>
+            <p><strong>Address: </strong><?php echo $customerModel->getShippingAddress();?></p>
+            <p><strong>City: </strong><?php echo $customerModel->getShippingCity();?></p>
+            <p><strong>Region: </strong><?php echo $customerModel->getShippingRegion();?></p>
+            <p><strong>Country: </strong><?php echo $customerModel->getShippingCountry();?></p>
+            <p><strong>Phone: </strong><?php echo $customerModel->getShippingPhone();?></p>
+          </div>
+          <div class="mt-3">
+       
+          <a href="<?php echo $this->getUrl('customer/account/register?id=') . $customerModel->getCustomerId() ?>"
+                        class=""><button type="button" class="btn btn-outline-success">Edit</button></a>
+            <a href="<?php echo $this->getUrl('customer/account/delete?id=') . $customerModel->getCustomerId() ?>"
                         class=""><button type="button" class="btn btn-outline-danger">Delete</button></a>
-                </td>
-        <!-- <td><button class="edit-button"><a href='<?php //echo $this->getUrl('customer/account/register')?>?id=<?php echo $customerModel->getCustomerId()?>'>Edit</a></button></td> 
-        <td><button class="delete-button"><a href='<?php //echo $this->getUrl('customer/account/delete')?>?id=<?php echo $customerModel->getCustomerId()?>'>Delete</a></button></td>  -->
-   
-        </tr>
-
- 
- 
-</table>
-</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

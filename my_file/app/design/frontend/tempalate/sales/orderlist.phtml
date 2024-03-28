@@ -1,41 +1,55 @@
 <?php
-$orderData = $this->getCustomerOrde(); //order_id,order number      //sales/order
-$ItemData = $this->getOrderItem();  //productid,qty                    //sales_order_item                 //catalog/product
-$productData = $this->getProductItem(); //customerId                //catalog_product  //sales/order_customer
-
-// $itemData = $this->getOrderItem();  //product id,name ,qty
+$orders = $this->getCustomerOrder(); //order_id,order number      //sales/order
 
 
-// print_r($orderData);die;
+$status = $this->getStatusModel();
+
 ?>
 <div class="container" style="margin-top:20px;">
-    <div class="table overflow-x-scroll"> 
+    <div class="table overflow-x-scroll">
         <table class="table table-striped">
             <tr>
-                
                 <th>Order ID</th>
-                <th>Total Qty</th>
                 <th>Order Number </th>
                 <th>Grand Total</th>
                 <th>Status</th>
-                <th>Action</th>
-                
+                <th>Update Status</th>
+                <th>View</th>
             </tr>
-            <?php
-            foreach($orderData as $Order){?>
-              
-            
-            <tr>
-                <td>
-                    <?php print_r($Order->getId());?>
-                </td>
-                <td>
-                    <?php print_r($Order->getOrderNumber());?>
-                </td>
-                
-            </tr>  
-            <?php }  ?>
-           
+
+            <?php foreach ($orders as $order) { ?>
+                <form action="<?php echo $this->getUrl('admin/order/save'); ?>?id=<?php echo $order->getId(); ?>"
+                    method="post" class="sales-quote-form">
+                    <tr>
+                        <td>
+                            <?php echo $order->getId(); ?>
+                        </td>
+                        <td>
+                            <?php echo $order->getOrderNumber(); ?>
+                        </td>
+                        <td>
+                            <?php echo $order->getGrandTotal(); ?>
+                        </td>
+
+                        <td>
+                            <select class="form-select status-dropdown" name=statusdata[status]>
+                                <?php foreach ($status as $key => $value) {
+                                    ?>
+                                    <option value=<?php echo $key?><?php //echo ($order->getStatus() == {$key})?'selected' : '' ; ?>><?php echo $value; ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-outline-success">Status Update</button>
+                        </td>
+                        <td>
+                            <a href="<?php echo $this->getUrl('admin/order/view?id=') . $order->getId()  ?>"
+                                class=""><button type="button" class="btn btn-outline-success">View</button></a>
+                        </td>
+
+                    </tr>
+                </form>
+            <?php } ?>
         </table>
     </div>
 </div>

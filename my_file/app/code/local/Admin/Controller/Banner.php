@@ -44,7 +44,7 @@ class Admin_Controller_Banner extends Core_Controller_Admin_Action
                 $e = $_FILES["bdata"]["error"]["banner_image"];
                 $n = $fileName;
                 $t = $_FILES["bdata"]["tmp_name"]["banner_image"];
-                $allowed = array('jpg', 'gif', 'png', 'PNG', 'jpeg');
+                $allowed = array('jpg', 'gif', 'png', 'PNG', 'jpeg','webp');
                 $ext = explode(".", $n);
 
                 if ($e == 0) {
@@ -77,6 +77,7 @@ class Admin_Controller_Banner extends Core_Controller_Admin_Action
         $bannerModel = Mage::getModel('banner/banner')
             ->load($this->getRequest()->getParams('id', 0))  // this will return data which  thid id
             ->delete();
+            $this->setRedirect('admin/banner/list');
 
     }
     public function listAction()

@@ -45,10 +45,10 @@ class Core_Model_Resource_Collection_Abstract
     return $this;
 
   }
-  public function getOrderByToFilter($column, $filter = null)
+  public function getOrderByToFilter($filter)
   {
 
-    $this->_select['orderby'] = $column . " " . $filter;
+    $this->_select['order by'] = $filter;
     return $this;
 
   }
@@ -69,7 +69,7 @@ class Core_Model_Resource_Collection_Abstract
         foreach ($_filters as $_value) {
 
           if (!is_array($_value)) {
-
+            
             $_value = ['eq' => $_value];
           }
           foreach ($_value as $_k => $_v) {
@@ -106,8 +106,9 @@ class Core_Model_Resource_Collection_Abstract
     if (isset($this->_select['groupby'])) {
       $sql .= "GROUP BY {$this->_select['groupby']} ";
     }
-    if (isset($this->_select['orderby'])) {
-      $sql .= "ORDER BY {$this->_select['orderby']}";
+    if (isset($this->_select['order by'])) {
+      $sql .= "ORDER BY {$this->_select['order by']}";
+      // echo $sql;
     }
     if (isset($this->_select['limit'])) {
       $sql .= "LIMIT {$this->_select['limit']} ";

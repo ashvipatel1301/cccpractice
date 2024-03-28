@@ -1,0 +1,31 @@
+<?php
+$cityCollection = Mage::getModel('cityuser/city')->getCollection();
+
+$userCollection = Mage::getModel('cityuser/user')->getCollection();
+
+
+?>
+<form action="<?php echo $this->getUrl("cityuser/city/form"); ?>" enctype="multipart/form-data" method="post">
+<label for="status">City</label>
+<select name="cdata[city]" id="city">
+<?php foreach ($cityCollection->getData() as $city): ?>
+            <option value='<?php echo $city->getName();?>'>
+                <?php echo $city->getName(); ?>
+            </option>
+        <?php endforeach; ?> 
+        
+</select>
+<br><br>
+    <input type="submit" value="submit">
+</br></br>
+
+    <select name="pdata[user]" id="user">
+        
+        <?php foreach ($userCollection->getData() as $user): ?>
+            <option value='<?php echo $user->getCityId();?>'>
+                <?php echo $user->getName(); ?>
+            </option>
+        <?php endforeach; ?> 
+        </form>
+        
+        

@@ -1,16 +1,81 @@
-    <header>
-           <div class="logo">Fashion Angel</div>
-           <nav>
-                <ul>
-                    <li><a href="#">home</a></li>
-                    <li><a href="#">about</a></li>
-                    <li><a href="#">contact</a></li>
-                    <li><a href="#">services</a></li>
-                </ul>
-           </nav>
+<?php
+$categoryCollection=Mage::getModel('catalog/category')->getCollection()->getData();
+$categories=[];
+foreach($categoryCollection as $cat)
+{
+    $categories[]=$cat->getCategoryName();
+}
+// Calculate number of categories and categories per column
+$totalCategories = count($categoryCollection);
+$categoriesPerColumn = ceil($totalCategories / 4);
 
-           <div class="button">
-               <a href="#" class="btn btn-1">learn more</a>
-               <a href="#" class="btn btn-2">book now</a>
-           </div>
-    </header>
+// Split category data into four parts
+$columns = array_chunk($categoryCollection, $categoriesPerColumn);
+?>
+<div class="headerdiv">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary p-3" data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#" style="font-size:30px;"><i class="fa-brands fa-asymmetrik" style="color: #eaecf0;"></i> Aura </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto m-2 mb-lg-0">
+            <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="<?php echo $this->getUrl('page/index/index');?>">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo $this->getUrl('catalog/product/view');?>">Products</a>
+            </li>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+            </a>
+            <ul class="dropdown-menu multi-column" aria-labelledby="navbarDropdown">
+            <?php foreach ($columns as $column) : ?>
+                <div class="column">
+                <ul>
+                    <?php foreach ($column as $category) : ?>
+                        <li><a class="dropdown-item category" href="<?php echo $this->getUrl('catalog/category/view');?>?id=<?php echo $category->getId(); ?>"><?php echo $category->getCategoryName(); ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+                </div>
+            <?php endforeach; ?>
+            </ul>
+            </li>
+            
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Login <i class="fa-solid fa-arrow-right-from-bracket" style="color: #f7f7f8;"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="<?php echo $this->getUrl('customer/account/login');?>">Customer</a></li>
+                    <li><a class="dropdown-item" href="<?php echo $this->getUrl('admin/account/login');?>">Admin</a></li>
+                    
+                </ul>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Profile <i class="fa-solid fa-user" style="color: #f0f2f5;"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="<?php echo $this->getUrl('customer/account/dashboard');?>">My Account <i class="fa-regular fa-circle-user" style="color: #e7eaee;"></i></a></li>
+                    <li><a class="dropdown-item" href="<?php echo $this->getUrl('sales/quote/view');?>">My Cart <i class="fa-solid fa-cart-shopping" style="color: #f8f9fc;"></i></a></li>
+                    <li><a class="dropdown-item" href="<?php echo $this->getUrl('customer/account/logout');?>">Logout <i class="fa-solid fa-right-from-bracket" style="color: #f2f4f8;"></i></a></li>
+                </ul>
+            </li>
+        </ul>
+        
+        </div>
+    </div>
+    </nav>
+</div>    

@@ -100,6 +100,7 @@ class Admin_Controller_Catalog_Product extends Core_Controller_Admin_Action
     } catch (Exception $e) {
         var_dump($e->getMessage());
     }
+    $this->setRedirect('admin/catalog_product/list');
 }
     
 }

@@ -1,0 +1,52 @@
+<?php
+$orderItems = $this->getOrderItems()->getData();
+$addresses = $this->getAddress();
+?>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Order Items</h2>
+            <!-- order items starts here!-->
+            <?php foreach ($orderItems as $item) : ?>
+                <div class="order-item" style="display: flex; align-items: center;">
+                    <div style="width: 150px; height: auto; overflow: hidden;">
+                        <img id="product-image" src="<?php echo Mage::getBaseUrl() . 'media/product/' . $item->getProduct()->getImageLink(); ?>" alt="Product Image" style="width: 100%; object-fit: cover;">
+                    </div>
+                    <div class="col-md-8" style="padding-left: 10px;">
+                        <h3 style="color: #f60; font-size: 20px; margin-bottom: 10px;"><?php echo $item->getProductName(); ?></h3>
+                        <p>Price: <?php echo '₹' . $item->getPrice(); ?></p>
+                        <p>Quantity: <?php echo $item->getQty(); ?></p>
+                        <p>Total: <?php echo '₹' . $item->getRowTotal(); ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <!-- order items ends here!-->
+        </div>
+        <div class="col-md-6">
+            <div class="address">
+                <h3>Billing Address</h3>
+                <p><strong>Address: </strong><?php echo $addresses->getBillingAddress(); ?></p>
+                <p><strong>City: </strong> <?php echo $addresses->getBillingCity(); ?></p>
+                <p><strong>Region: </strong><?php echo $addresses->getBillingRegion(); ?></p>
+                <p><strong>Country: </strong><?php echo $addresses->getBillingCountry(); ?></p>
+                <p><strong>Contact No: </strong><?php echo $addresses->getBillingPhone(); ?></p>
+            </div>
+            <div class="address mt-4">
+                <h3>Shipping Address</h3>
+                <p><strong>Address: </strong><?php echo $addresses->getShippingAddress(); ?></p>
+                <p><strong>City: </strong><?php echo $addresses->getShippingCity(); ?></p>
+                <p><strong>Region: </strong><?php echo $addresses->getShippingRegion(); ?></p>
+                <p><strong>Country: </strong><?php echo $addresses->getShippingCountry(); ?></p>
+                <p><strong>Contact No: </strong><?php echo $addresses->getShippingPhone(); ?></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Dynamically adjust the height of the product image based on the height of the details section
+    window.onload = function() {
+        var detailsHeight = document.querySelector('.col-md-8').offsetHeight;
+        document.getElementById('product-image').style.height = detailsHeight + 'px';
+    };
+</script>

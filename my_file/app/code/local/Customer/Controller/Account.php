@@ -50,6 +50,7 @@ class Customer_Controller_Account extends Core_Controller_Front_Action
             $productData->setData($data);
              print_r($productData->getData());  //return data
             $productData->save();
+            $this->setRedirect('customer/account/login');
         die;
     }
     public function deleteAction()
@@ -131,10 +132,18 @@ public function dashboardAction(){
 
         $layout = $this->getLayout();
         
+        
+        $dashboadCss = Mage::getBaseUrl() . 'skin/css/customer/dashboard.css';
+        $layout->getChild('head')->addCss($dashboadCss);
         $child = $layout->getChild('content');
         $customerList =  $layout->createBlock('customer/dashboard');
         $child->addChild('customer',$customerList);
         $layout->toHtml();  
+        
+    }
+    public function logoutAction(){
+        Mage::getSingleton('core/session')->remove('logged_in_customer_id');
+        $this->setRedirect('page/index/index');
     }
 }
 
